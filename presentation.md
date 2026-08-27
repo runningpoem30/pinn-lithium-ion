@@ -1,35 +1,28 @@
-# PINN_Battery_Prognostics
+This graph shows the degradation behavior of an individual lithium-ion battery over its cycling lifetime. We can observe how the State of Health changes as the number of charge-discharge cycles increases. The decreasing trend indicates capacity degradation with repeated cycling. This preliminary analysis helps us establish the relationship between battery usage and health before applying machine-learning models.
 
-This repository includes the code and data for the paper "***Physics-Informed Neural Networks for Prognostics and Health Management of Lithium-Ion Batteries***"
+![alt text](image.png)
+![alt text](image-1.png)
 
-## Abstract
+Before training the neural network, we first analyzed the underlying degradation behavior in the dataset. This allows us to verify that the processed data preserves the expected physical behavior of battery aging.
 
-For Prognostics and Health Management (PHM) of Lithium-ion (Li-ion) batteries, many models have been established to characterize their degradation process. The existing empirical or physical models can reveal important information regarding the degradation dynamics. However, there are no general and flexible methods to fuse the information represented by those models. Physics-Informed Neural Network (PINN) is an efficient tool to fuse empirical or physical dynamic models with data-driven models. To take full advantage of various information sources, we propose a model fusion scheme based on PINN. It is implemented by developing a semi-empirical semi-physical Partial Differential Equation (PDE) to model the degradation dynamics of Li-ion batteries. When there is little prior knowledge about the dynamics, we leverage the data-driven Deep Hidden Physics Model (DeepHPM) to discover the underlying governing dynamic models. The uncovered dynamics information is then fused with that mined by the surrogate neural network in the PINN framework. Moreover, an uncertainty-based adaptive weighting method is employed to balance the multiple learning tasks when training the PINN. The proposed methods are verified on a public dataset of Li-ion Phosphate (LFP)/graphite batteries.
+The next stage is to use the extracted battery-health features as inputs to a baseline neural network and evaluate whether the model can learn this degradation behavior and predict battery health.
 
-![PINN-Verhulst](https://github.com/WenPengfei0823/PINN-Battery-Prognostics/blob/main/Documents/PINN_Verhulst.jpg "Model fusion with *a priori* known dynamic model.")
-
-![PINN-DeepHPM](https://github.com/WenPengfei0823/PINN-Battery-Prognostics/blob/main/Documents/PINN_DeepHPM.jpg "Model fusion without *a priori* known dynamic model.")
-
-## Citation
-
-> ```
-> @article{Wen2023_PINN,
-> author = {Wen, Pengfei and Ye, Zhi-Sheng and Li, Yong and Chen, Shaowei and Xie, Pu and Zhao, Shuai},
-> title = {Physics-informed neural networks for prognostics and health management of lithium-ion batteries},
-> journal = {IEEE Transactions on Intelligent Vehicles},
-> year = {2024},
-> type = {Journal Article},
-> volume = {9},
-> number = {1},
-> pages = {2276-2289},
-> doi = {10.1109/TIV.2023.3315548}
-> }
-> ```
+The processed dataset shows the expected battery degradation behavior. We can see a clear decreasing trend in the State of Health (SOH) as the number of cycles increases, which aligns with the expected physical degradation patterns of lithium-ion batteries.
 
 
-## Instruction
 
-1. Run "LoadData.m" to load data.
-2. Run "ProcessData.m" to process data.
-3. Run "ExtractFeature.m" to extract the involved features.
-4. Then the users can run the codes in the folders "Experiments" to replicate our experiments.
+The original Severson dataset contains 124 commercial LFP/graphite cells, cycled under fast-charging conditions, with cycle lives ranging roughly from 150 to 2,300 cycles.
+Each battery was repeatedly charged/discharged, producing many cycle records.
+
+
+why split the batteries?
+
+Battery degradation is a time-dependent trajectory, so cycle 500 and cycle 501 from the same cell are extremely related.
+
+The Severson dataset contains 124 LFP/graphite lithium-ion cells, with multiple charge-discharge cycles recorded for each cell. Since individual cycle records from the same battery are highly correlated, we avoid randomly splitting individual cycles because that can cause data leakage. Instead, we perform the train, validation and test split at the battery level, so all cycles from a particular battery remain in the same subset. The training batteries are used to learn the degradation relationship, validation batteries are used for model development and tuning, and completely unseen test batteries are reserved for the final evaluation.
+
+
+
+After preparing the eight engineered battery features, we implemented a baseline data-driven neural network. The model was trained using the processed battery dataset, and the training and validation MSE were monitored over 100 epochs. The loss decreases significantly during the initial epochs and then stabilizes, indicating that the network is learning the underlying relationship in the data.
+![alt text](image-2.png)
+This is our baseline model. In the next stage, we will evaluate its SoH and RUL prediction performance quantitatively and compare it with a physics-informed neural network.
