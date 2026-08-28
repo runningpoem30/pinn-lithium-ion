@@ -1,3 +1,10 @@
+dataset used : https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle
+MIT-Stanford Dataset : Data-driven prediction of battery cycle life
+
+8 features being used :
+<!-- image of 8 features  -->
+![alt text](image-6.png)
+
 The Severson dataset contains 124 LFP/graphite lithium-ion cells, with multiple charge-discharge cycles recorded for each cell. Since individual cycle records from the same battery are highly correlated, we avoid randomly splitting individual cycles because that can cause data leakage. Instead, we perform the train, validation and test split at the battery level, so all cycles from a particular battery remain in the same subset. The training batteries are used to learn the degradation relationship, validation batteries are used for model development and tuning, and completely unseen test batteries are reserved for the final evaluation.
 
 This graph shows the degradation behavior of an individual lithium-ion battery over its cycling lifetime. We can observe how the State of Health changes as the number of charge-discharge cycles increases. The decreasing trend indicates capacity degradation with repeated cycling. This preliminary analysis helps us establish the relationship between battery usage and health before applying machine-learning models.
@@ -20,12 +27,25 @@ This is our baseline model.
 ![alt text](image-3.png)
 This graph compares the actual SoH values from the test batteries with the SoH predicted by our baseline DataDrivenNN. The purpose is to visually assess how closely the model follows the actual battery degradation trajectory.
 
-<!-- 
-this is the image of baseline vs preliminary physics informed nn -->
+<!-- this is the PINN Data Loss + Physics Loss + Total Loss image -->
+![alt text](image-7.png)
+
+
+
+<!-- this is the image of baseline vs preliminary physics informed nn -->
 ![alt text](image-4.png)
 This is our preliminary comparison between the purely data-driven neural network and the physics-informed model. The baseline DataDrivenNN achieved an RMSE of approximately 0.117, whereas after introducing the Verhulst physics constraint, the preliminary PINN achieved an RMSE of approximately 0.091. Since lower RMSE indicates lower prediction error, this represents roughly a 22% reduction in RMSE in our current experiment.
 
 
 This is only our initial physics-informed formulation. We haven't considered this the final model yet. In the next stage, we plan to tune the physics-loss weighting, calibrate the degradation parameters, improve the physics formulation and then evaluate RUL prediction and the DeepHPM model.
 
+
+The baseline learns only from the observed battery data. In the PINN, we added a physics loss based on the Verhulst degradation equation. So the model is optimized not only to minimize prediction error but also to produce a degradation trajectory that is consistent with the assumed physical degradation behaviour.
+
+
+
+
+
+<!-- the degradation equation image just to remember-->
+![alt text](image-5.png)
 
