@@ -1,0 +1,23 @@
+data:
+  dataset_path: SeversonBattery.mat
+  batch_size: 128
+  num_workers: 0
+
+model:
+  surrogate_hidden_dims: [16, 16]
+  dynamics_hidden_dims: [8, 8]
+
+training:
+  seed: 1234
+  epochs: 4
+  learning_rate: 0.001
+  weight_decay: 0.0
+  physics_weight: 0.1
+  gradient_clip_norm: 5.0
+  early_stopping_patience: 3
+  early_stopping_min_delta: 0.00001
+  device: cpu
+  max_train_batches: 2
+  max_validation_batches: 2
+
+output_dir: artifacts/deephpm/smoke

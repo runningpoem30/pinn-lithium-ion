@@ -1,0 +1,7 @@
+{
+  "best_epoch": 4,
+  "best_validation_loss": 0.6633976995944977,
+  "epochs_completed": 4,
+  "stopped_early": false,
+  "device": "cpu"
+}

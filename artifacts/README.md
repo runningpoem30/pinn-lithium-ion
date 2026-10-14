@@ -10,3 +10,7 @@ Step 2 adds:
 - `data_scalers.npz`: non-pickled feature, cycle, and PCL scaler statistics fitted
   exclusively from the official training batteries.
 - `data_pipeline_summary.json`: split membership, record counts, and scaler values.
+
+`deephpm/smoke/` contains the bounded Step 4 CPU smoke-test checkpoint,
+resolved configuration, scaler copy, per-epoch loss history, and training summary.
+It is a software verification run, not an experimental result.
