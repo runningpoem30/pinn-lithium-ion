@@ -25,6 +25,16 @@ class DeepHPMOutput:
     residual_normalized: torch.Tensor
 
 
+@dataclass(frozen=True)
+class DataDrivenOutput:
+    """SoH baseline output with no learned physics quantities."""
+
+    pcl: torch.Tensor
+    pcl_normalized: torch.Tensor
+    cycle_raw: torch.Tensor
+    cycle_normalized: torch.Tensor
+
+
 class MLP(nn.Module):
     """A deterministic fully connected network with smooth activations."""
 
@@ -57,6 +67,82 @@ class MLP(nn.Module):
 
     def forward(self, inputs: torch.Tensor) -> torch.Tensor:
         return self.network(inputs)
+
+
+class DataDrivenNN(nn.Module):
+    """Data-only ablation of the DeepHPM surrogate network."""
+
+    def __init__(
+        self,
+        *,
+        feature_dim: int,
+        cycle_mean: float,
+        cycle_scale: float,
+        target_mean: float,
+        target_scale: float,
+        surrogate_hidden_dims: Sequence[int] = (128, 128),
+    ) -> None:
+        super().__init__()
+        if feature_dim <= 0:
+            raise ValueError("feature_dim must be positive")
+        if cycle_scale <= 0 or target_scale <= 0:
+            raise ValueError("cycle_scale and target_scale must be positive")
+        self.feature_dim = feature_dim
+        self.surrogate = MLP(
+            input_dim=feature_dim + 1,
+            hidden_dims=surrogate_hidden_dims,
+            output_dim=1,
+        )
+        self.register_buffer(
+            "cycle_mean", torch.tensor([cycle_mean], dtype=torch.float32)
+        )
+        self.register_buffer(
+            "cycle_scale", torch.tensor([cycle_scale], dtype=torch.float32)
+        )
+        self.register_buffer(
+            "target_mean", torch.tensor([target_mean], dtype=torch.float32)
+        )
+        self.register_buffer(
+            "target_scale", torch.tensor([target_scale], dtype=torch.float32)
+        )
+
+    @classmethod
+    def from_scalers(
+        cls,
+        scalers: DatasetScalers,
+        *,
+        feature_dim: int,
+        surrogate_hidden_dims: Sequence[int] = (128, 128),
+    ) -> "DataDrivenNN":
+        return cls(
+            feature_dim=feature_dim,
+            cycle_mean=float(scalers.cycle.mean[0]),
+            cycle_scale=float(scalers.cycle.scale[0]),
+            target_mean=float(scalers.target_pcl.mean[0]),
+            target_scale=float(scalers.target_pcl.scale[0]),
+            surrogate_hidden_dims=surrogate_hidden_dims,
+        )
+
+    def forward(
+        self, features_normalized: torch.Tensor, cycle_raw: torch.Tensor
+    ) -> DataDrivenOutput:
+        if features_normalized.ndim != 2:
+            raise ValueError("features_normalized must have shape [batch, features]")
+        if cycle_raw.ndim != 2 or cycle_raw.shape[1] != 1:
+            raise ValueError("cycle_raw must have shape [batch, 1]")
+        if features_normalized.shape != (cycle_raw.shape[0], self.feature_dim):
+            raise ValueError("feature shape does not match cycle batch or feature_dim")
+        cycle_normalized = (cycle_raw - self.cycle_mean) / self.cycle_scale
+        pcl_normalized = self.surrogate(
+            torch.cat((features_normalized, cycle_normalized), dim=-1)
+        )
+        pcl = pcl_normalized * self.target_scale + self.target_mean
+        return DataDrivenOutput(
+            pcl=pcl,
+            pcl_normalized=pcl_normalized,
+            cycle_raw=cycle_raw,
+            cycle_normalized=cycle_normalized,
+        )
 
 
 def time_derivative(

@@ -11,3 +11,9 @@ the final test batteries.
 freezes the validation-selected physics weight at `0.001`, uses every training
 and validation record, selects checkpoints only by validation data loss, and
 evaluates the untouched secondary-test batteries once per seed after training.
+
+`data_driven_soh_final.yaml` defines the Step 9 data-only SoH ablation. It uses
+the same surrogate architecture, normalized inputs, raw cycle input, optimizer,
+batching, early stopping, complete splits, and fixed seeds as the final DeepHPM
+experiment, but sets the physics weight to zero and instantiates no dynamics
+network.

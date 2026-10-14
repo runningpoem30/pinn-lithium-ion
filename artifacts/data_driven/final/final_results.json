@@ -1,0 +1,119 @@
+{
+  "experiment": "DataDrivenNN SoH final multi-seed evaluation",
+  "model_type": "data_driven",
+  "loss": "normalized PCL mean squared error only",
+  "model_selection_data": "validation split only",
+  "test_evaluation_timing": "once per seed after best checkpoint restoration",
+  "per_seed": [
+    {
+      "seed": 1234,
+      "best_epoch": 21,
+      "epochs_completed": 31,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 0.014209325485849241,
+      "rmse": 0.01658647414505472,
+      "r2": 0.8265163967654491,
+      "bias": 0.01394497887181727,
+      "signed_error_p05": -5.272626876831035e-05,
+      "signed_error_p50": 0.014949530363082886,
+      "signed_error_p95": 0.029900649189949027,
+      "absolute_error_p50": 0.014949530363082886,
+      "absolute_error_p90": 0.024163556098937986,
+      "absolute_error_p95": 0.029900649189949027,
+      "absolute_error_p99": 0.03850027441978455
+    },
+    {
+      "seed": 2345,
+      "best_epoch": 30,
+      "epochs_completed": 40,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 0.014396809694780873,
+      "rmse": 0.016637946859923314,
+      "r2": 0.8254379846006019,
+      "bias": 0.014151628844432758,
+      "signed_error_p05": 0.00040538609027862603,
+      "signed_error_p50": 0.014207005500793457,
+      "signed_error_p95": 0.028456240892410244,
+      "absolute_error_p50": 0.014207005500793457,
+      "absolute_error_p90": 0.02539796233177185,
+      "absolute_error_p95": 0.028456240892410244,
+      "absolute_error_p99": 0.03746829092502595
+    },
+    {
+      "seed": 3456,
+      "best_epoch": 29,
+      "epochs_completed": 39,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 0.011361363366838802,
+      "rmse": 0.013772527560057587,
+      "r2": 0.8803872206441119,
+      "bias": 0.010328830053052431,
+      "signed_error_p05": -0.004336738586425781,
+      "signed_error_p50": 0.010241776704788208,
+      "signed_error_p95": 0.02496178746223448,
+      "absolute_error_p50": 0.01045188307762146,
+      "absolute_error_p90": 0.0210162878036499,
+      "absolute_error_p95": 0.02496178746223448,
+      "absolute_error_p99": 0.03405200123786927
+    }
+  ],
+  "aggregate": {
+    "num_seeds": 3,
+    "seeds": [
+      1234,
+      2345,
+      3456
+    ],
+    "standard_deviation": "sample (ddof=1)",
+    "mae": {
+      "mean": 0.013322499515822971,
+      "std": 0.001700978785373006
+    },
+    "rmse": {
+      "mean": 0.01566564952167854,
+      "std": 0.0016396937004430612
+    },
+    "r2": {
+      "mean": 0.8441138673367211,
+      "std": 0.0314182727615862
+    },
+    "bias": {
+      "mean": 0.012808479256434155,
+      "std": 0.002149923529260797
+    },
+    "signed_error_p05": {
+      "mean": -0.0013280262549718218,
+      "std": 0.0026156699244094667
+    },
+    "signed_error_p50": {
+      "mean": 0.013132770856221518,
+      "std": 0.0025310513982326954
+    },
+    "signed_error_p95": {
+      "mean": 0.02777289251486458,
+      "std": 0.0025393527807674923
+    },
+    "absolute_error_p50": {
+      "mean": 0.013202806313832601,
+      "std": 0.0024111241737878757
+    },
+    "absolute_error_p90": {
+      "mean": 0.023525935411453244,
+      "std": 0.0022593556655448378
+    },
+    "absolute_error_p95": {
+      "mean": 0.02777289251486458,
+      "std": 0.0025393527807674923
+    },
+    "absolute_error_p99": {
+      "mean": 0.03667352219422659,
+      "std": 0.002328202434675513
+    }
+  }
+}

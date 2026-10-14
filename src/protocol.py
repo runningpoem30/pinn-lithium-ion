@@ -17,6 +17,18 @@ from src.data_audit import FEATURE_NAMES
 
 PROTOCOL_VERSION = 1
 FIXED_SEEDS = (1234, 2345, 3456)
+SHARED_SOH_SETTINGS = {
+    "batch_size": 2048,
+    "surrogate_hidden_dims": (64, 64),
+    "optimizer": "Adam",
+    "epochs": 60,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "gradient_clip_norm": 5.0,
+    "early_stopping_patience": 10,
+    "early_stopping_min_delta": 0.0001,
+    "early_stopping_monitor": "data",
+}
 SPLIT_SOURCE_MAPPING = {
     "train": "train_ind",
     "validation": "test_ind",
@@ -262,6 +274,10 @@ def protocol_manifest(
         "task": "soh",
         "model_types": [model.value for model in ModelType],
         "seeds": list(FIXED_SEEDS),
+        "shared_training_settings": {
+            name: list(value) if isinstance(value, tuple) else value
+            for name, value in SHARED_SOH_SETTINGS.items()
+        },
         "features": list(FEATURE_NAMES),
         "input_definition": "eight normalized features plus cycle normalized inside the model",
         "target_definition": {

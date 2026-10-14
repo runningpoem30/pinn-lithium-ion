@@ -11,6 +11,21 @@
     2345,
     3456
   ],
+  "shared_training_settings": {
+    "batch_size": 2048,
+    "surrogate_hidden_dims": [
+      64,
+      64
+    ],
+    "optimizer": "Adam",
+    "epochs": 60,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "gradient_clip_norm": 5.0,
+    "early_stopping_patience": 10,
+    "early_stopping_min_delta": 0.0001,
+    "early_stopping_monitor": "data"
+  },
   "features": [
     "slope",
     "intercept",

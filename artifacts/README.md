@@ -40,3 +40,10 @@ protocol fixes splits, features, seeds, training-only scaler identity,
 validation-only checkpoint selection, metrics, prediction columns, and artifact
 paths. Generate and validate it with `python -m src.protocol`; it performs no
 training and does not alter completed model artifacts.
+
+`data_driven/final/` contains the Step 9 three-seed DataDrivenNN SoH baseline.
+Each run uses the same surrogate architecture and training protocol as DeepHPM
+but optimizes normalized PCL data loss only. Seed directories contain the
+checkpoint, frozen scalers, resolved configuration, history, training summary,
+test metrics, and protocol-aligned cycle-level predictions. Root reports contain
+per-seed results and mean/sample-standard-deviation aggregates.

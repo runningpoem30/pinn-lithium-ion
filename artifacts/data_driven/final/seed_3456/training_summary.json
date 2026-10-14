@@ -1,0 +1,9 @@
+{
+  "best_epoch": 29,
+  "best_validation_loss": 0.04500791158253277,
+  "epochs_completed": 39,
+  "stopped_early": true,
+  "device": "cpu",
+  "early_stopping_monitor": "data",
+  "physics_loss_used": false
+}

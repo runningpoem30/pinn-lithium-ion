@@ -189,7 +189,7 @@ def _atomic_torch_save(payload: dict[str, Any], path: Path) -> None:
 def save_checkpoint(
     path: Path,
     *,
-    model: DeepHPMNN,
+    model: nn.Module,
     optimizer: Adam,
     epoch: int,
     best_validation_loss: float,
@@ -209,7 +209,7 @@ def save_checkpoint(
 def load_checkpoint(
     path: Path,
     *,
-    model: DeepHPMNN,
+    model: nn.Module,
     optimizer: Adam | None = None,
     map_location: str | torch.device = "cpu",
 ) -> dict[str, Any]:
