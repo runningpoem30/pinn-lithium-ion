@@ -282,6 +282,27 @@ def calculate_comparison(data: ComparisonData) -> tuple[
     cohort_matrix = np.column_stack(
         (data.battery_id.astype(np.float64), data.cycle, data.target_soh)
     ).astype("<f8")
+    baseline_seed = model_summaries["data_driven"]["seed_aggregate_metrics"]
+    baseline_ensemble = model_summaries["data_driven"]["ensemble_metrics"]
+    relative_to_baseline = {}
+    for key, model_summary in model_summaries.items():
+        relative_to_baseline[key] = {
+            "seed_mean_mae_reduction_percent": 100.0
+            * (
+                baseline_seed["mae"]["mean"]
+                - model_summary["seed_aggregate_metrics"]["mae"]["mean"]
+            )
+            / baseline_seed["mae"]["mean"],
+            "seed_mean_rmse_reduction_percent": 100.0
+            * (
+                baseline_seed["rmse"]["mean"]
+                - model_summary["seed_aggregate_metrics"]["rmse"]["mean"]
+            )
+            / baseline_seed["rmse"]["mean"],
+            "ensemble_rmse_reduction_percent": 100.0
+            * (baseline_ensemble["rmse"] - model_summary["ensemble_metrics"]["rmse"])
+            / baseline_ensemble["rmse"],
+        }
     summary = {
         "comparison_method": "saved predictions only; no model loading or retraining",
         "alignment": {
@@ -297,6 +318,7 @@ def calculate_comparison(data: ComparisonData) -> tuple[
         "metric_definition": "cycle-weighted metrics from the frozen shared protocol",
         "ensemble_definition": "equal-weight arithmetic mean of three aligned seed predictions",
         "models": model_summaries,
+        "relative_to_data_driven": relative_to_baseline,
         "representative_batteries": {
             "selection": "lowest, median, and highest mean ensemble RMSE across models",
             "battery_ids": representatives,
@@ -362,6 +384,7 @@ def _plot_parity(data: ComparisonData, ensembles: list[dict[str, Any]]) -> plt.F
 def _plot_trajectories(data: ComparisonData, representatives: list[int]) -> plt.Figure:
     fig, axes = plt.subplots(1, 3, figsize=(16, 5), sharey=True)
     descriptions = ("Lowest shared error", "Median shared error", "Highest shared error")
+    line_styles = {"data_driven": "--", "verhulst": "-", "deephpm": ":"}
     for axis, battery_id, description in zip(axes, representatives, descriptions, strict=True):
         mask = data.battery_id == battery_id
         cycles = data.cycle[mask]
@@ -370,7 +393,10 @@ def _plot_trajectories(data: ComparisonData, representatives: list[int]) -> plt.
             predictions = model.predicted_soh[:, mask]
             mean = predictions.mean(axis=0)
             std = predictions.std(axis=0, ddof=1)
-            axis.plot(cycles, mean, color=model.color, linewidth=1.7, label=model.label)
+            axis.plot(
+                cycles, mean, color=model.color, linestyle=line_styles[model.key],
+                linewidth=2.0, label=model.label,
+            )
             axis.fill_between(cycles, mean - std, mean + std, color=model.color, alpha=0.10)
         axis.set(title=f"Battery {battery_id}\n{description}", xlabel="Cycle")
     axes[0].set_ylabel("SoH")
@@ -382,15 +408,19 @@ def _plot_trajectories(data: ComparisonData, representatives: list[int]) -> plt.
 
 def _plot_per_battery(per_battery: list[dict[str, Any]]) -> plt.Figure:
     fig, axis = plt.subplots(figsize=(13, 5.8))
-    for key, spec in MODEL_SPECS.items():
+    offsets = (-0.20, 0.0, 0.20)
+    markers = ("o", "s", "^")
+    for (key, spec), offset, marker in zip(
+        MODEL_SPECS.items(), offsets, markers, strict=True
+    ):
         rows = sorted(
             [row for row in per_battery if row["model"] == key],
             key=lambda row: row["battery_id"],
         )
         axis.plot(
-            [row["battery_id"] for row in rows],
+            [row["battery_id"] + offset for row in rows],
             [row["rmse"] for row in rows],
-            marker="o", markersize=3.5, linewidth=1.6,
+            marker=marker, markersize=3.8, linewidth=1.25,
             color=spec["color"], label=spec["label"],
         )
     axis.set(
@@ -405,16 +435,18 @@ def _plot_per_battery(per_battery: list[dict[str, Any]]) -> plt.Figure:
 
 def _plot_error_distributions(data: ComparisonData) -> plt.Figure:
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+    line_styles = {"data_driven": "--", "verhulst": "-", "deephpm": ":"}
     for model in data.models.values():
         error = model.ensemble - data.target_soh
         axes[0].hist(
             error, bins=70, density=True, histtype="step", linewidth=1.8,
-            color=model.color, label=model.label,
+            color=model.color, linestyle=line_styles[model.key], label=model.label,
         )
         absolute = np.sort(np.abs(error))
         axes[1].plot(
             absolute, np.arange(1, absolute.size + 1) / absolute.size,
-            color=model.color, linewidth=2, label=model.label,
+            color=model.color, linestyle=line_styles[model.key], linewidth=2.2,
+            label=model.label,
         )
     axes[0].axvline(0.0, color="#222222", linestyle="--")
     axes[0].set(xlabel="Signed SoH error", ylabel="Density", title="Signed-error distribution")
@@ -428,21 +460,25 @@ def _plot_error_distributions(data: ComparisonData) -> plt.Figure:
 
 def _plot_seed_stability(per_seed: list[dict[str, Any]]) -> plt.Figure:
     fig, axes = plt.subplots(1, 3, figsize=(15, 4.8))
+    x = np.arange(len(FIXED_SEEDS))
+    width = 0.24
     for axis, (metric, title) in zip(
         axes, (("mae", "MAE"), ("rmse", "RMSE"), ("r2", r"$R^2$")), strict=True
     ):
-        for key, spec in MODEL_SPECS.items():
+        for model_index, (key, spec) in enumerate(MODEL_SPECS.items()):
             rows = sorted(
                 [row for row in per_seed if row["model"] == key],
                 key=lambda row: row["seed"],
             )
-            axis.plot(
-                [str(row["seed"]) for row in rows],
+            axis.bar(
+                x + (model_index - 1) * width,
                 [row[metric] for row in rows],
-                "o-", linewidth=1.8, markersize=6,
-                color=spec["color"], label=spec["label"],
+                width, color=spec["color"], label=spec["label"],
             )
-        axis.set(xlabel="Fixed seed", ylabel=title, title=title)
+        axis.set(
+            xticks=x, xticklabels=[str(seed) for seed in FIXED_SEEDS],
+            xlabel="Fixed seed", ylabel=title, title=title,
+        )
     axes[0].legend()
     fig.suptitle("Model stability across the same three random seeds")
     fig.tight_layout()
@@ -540,6 +576,13 @@ def _write_markdown(
         )
     lines.extend(
         [
+            "",
+            "## Relative to DataDrivenNN",
+            "",
+            f"- VerhulstPINN seed-mean RMSE reduction: {summary['relative_to_data_driven']['verhulst']['seed_mean_rmse_reduction_percent']:.3f}%",
+            f"- VerhulstPINN ensemble RMSE reduction: {summary['relative_to_data_driven']['verhulst']['ensemble_rmse_reduction_percent']:.3f}%",
+            f"- DeepHPMNN seed-mean RMSE reduction: {summary['relative_to_data_driven']['deephpm']['seed_mean_rmse_reduction_percent']:.3f}%",
+            f"- DeepHPMNN ensemble RMSE reduction: {summary['relative_to_data_driven']['deephpm']['ensemble_rmse_reduction_percent']:.3f}%",
             "",
             "## Interpretation guardrails",
             "",

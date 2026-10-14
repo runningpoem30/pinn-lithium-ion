@@ -512,6 +512,23 @@
       }
     }
   },
+  "relative_to_data_driven": {
+    "data_driven": {
+      "seed_mean_mae_reduction_percent": 0.0,
+      "seed_mean_rmse_reduction_percent": 0.0,
+      "ensemble_rmse_reduction_percent": 0.0
+    },
+    "verhulst": {
+      "seed_mean_mae_reduction_percent": 6.346580167911189,
+      "seed_mean_rmse_reduction_percent": 5.586571957372657,
+      "ensemble_rmse_reduction_percent": 5.8447770191385535
+    },
+    "deephpm": {
+      "seed_mean_mae_reduction_percent": 0.002523819560265097,
+      "seed_mean_rmse_reduction_percent": 0.0046899404856601806,
+      "ensemble_rmse_reduction_percent": 0.004467147146408977
+    }
+  },
   "representative_batteries": {
     "selection": "lowest, median, and highest mean ensemble RMSE across models",
     "battery_ids": [

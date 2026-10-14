@@ -11,6 +11,13 @@ All nine prediction files were aligned by `(battery_id, cycle)` and verified to 
 | VerhulstPINN | 0.012477 ± 0.001603 | 0.014790 ± 0.001519 | 0.8611 ± 0.0276 | 0.014570 | 0.8661 | 0.011761 |
 | DeepHPMNN | 0.013322 ± 0.001702 | 0.015665 ± 0.001640 | 0.8441 ± 0.0314 | 0.015474 | 0.8490 | 0.012808 |
 
+## Relative to DataDrivenNN
+
+- VerhulstPINN seed-mean RMSE reduction: 5.587%
+- VerhulstPINN ensemble RMSE reduction: 5.845%
+- DeepHPMNN seed-mean RMSE reduction: 0.005%
+- DeepHPMNN ensemble RMSE reduction: 0.004%
+
 ## Interpretation guardrails
 
 - Seed means describe repeated-training performance; ensemble metrics describe averaged predictions and are not interchangeable.

@@ -67,3 +67,11 @@ training summary, test metrics, and cycle-level prediction artifacts as the
 other models, plus the learned constrained `r`, `K`, and `C` values. The final
 test batteries are evaluated once per seed only after restoring the
 validation-selected checkpoint.
+
+`comparisons/soh/` contains the Step 12 read-only comparison of the completed
+DataDrivenNN, VerhulstPINN, and DeepHPMNN SoH experiments. It verifies all nine
+prediction tables against the same battery/cycle keys and targets, then saves
+per-seed, seed-aggregate, ensemble, per-battery, percentile, and physics
+residual results as CSV/JSON/Markdown. Seven presentation figures are available
+as 300-DPI PNG, SVG, and PDF. Regenerate with `python -m src.compare_soh`; the
+command reads prediction artifacts only and never loads or trains a model.
