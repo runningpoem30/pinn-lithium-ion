@@ -33,3 +33,10 @@ predictions. It includes aligned three-seed ensemble predictions, aggregate and
 per-battery metrics, and eight presentation figures in 300-DPI PNG, SVG, and
 PDF formats. Generate it with `python -m src.analyze_final`; this command does
 not load a checkpoint or retrain a model.
+
+`protocol/` contains the Step 8 frozen SoH comparison contract and canonical
+test keys/targets shared by DataDrivenNN, VerhulstPINN, and DeepHPMNN. The
+protocol fixes splits, features, seeds, training-only scaler identity,
+validation-only checkpoint selection, metrics, prediction columns, and artifact
+paths. Generate and validate it with `python -m src.protocol`; it performs no
+training and does not alter completed model artifacts.

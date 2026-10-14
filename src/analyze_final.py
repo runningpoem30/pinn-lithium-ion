@@ -19,16 +19,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from src.evaluation import load_prediction_csv, regression_metrics
+from src.protocol import CORE_PREDICTION_COLUMNS, PHYSICS_PREDICTION_COLUMNS
 
-PREDICTION_COLUMNS = (
-    "battery_id",
-    "cycle",
-    "target_soh",
-    "predicted_soh",
-    "time_derivative",
-    "dynamics",
-    "physics_residual",
-)
+PREDICTION_COLUMNS = CORE_PREDICTION_COLUMNS + PHYSICS_PREDICTION_COLUMNS
 FIGURE_NAMES = (
     "01_actual_vs_predicted_soh",
     "02_representative_battery_trajectories",
@@ -56,17 +50,8 @@ class AlignedPredictions:
 
 
 def _numeric_csv(path: Path) -> dict[str, np.ndarray]:
-    values = np.genfromtxt(path, delimiter=",", names=True, dtype=np.float64)
-    values = np.atleast_1d(values)
-    if values.dtype.names is None:
-        raise ValueError(f"CSV has no header: {path}")
-    missing = sorted(set(PREDICTION_COLUMNS) - set(values.dtype.names))
-    if missing:
-        raise ValueError(f"{path} is missing columns: {missing}")
-    result = {name: np.asarray(values[name]) for name in PREDICTION_COLUMNS}
-    if not all(np.all(np.isfinite(column)) for column in result.values()):
-        raise FloatingPointError(f"Non-finite values found in {path}")
-    return result
+    table = load_prediction_csv(path, require_physics=True)
+    return {name: table.columns[name] for name in PREDICTION_COLUMNS}
 
 
 def _seed_directories(input_dir: Path) -> list[tuple[int, Path]]:
@@ -131,33 +116,6 @@ def load_aligned_predictions(input_dir: Path) -> AlignedPredictions:
         dynamics=np.stack(stacked["dynamics"]),
         physics_residual=np.stack(stacked["physics_residual"]),
     )
-
-
-def regression_metrics(target: np.ndarray, prediction: np.ndarray) -> dict[str, float]:
-    target = np.asarray(target, dtype=np.float64).reshape(-1)
-    prediction = np.asarray(prediction, dtype=np.float64).reshape(-1)
-    if target.shape != prediction.shape or target.size == 0:
-        raise ValueError("Target and prediction must be non-empty arrays of equal shape")
-    if not np.all(np.isfinite(target)) or not np.all(np.isfinite(prediction)):
-        raise FloatingPointError("Metrics require finite values")
-    error = prediction - target
-    denominator = np.square(target - target.mean()).sum()
-    if denominator <= 0:
-        raise ValueError("R2 is undefined for a constant target")
-    absolute = np.abs(error)
-    return {
-        "mae": float(absolute.mean()),
-        "rmse": float(np.sqrt(np.square(error).mean())),
-        "r2": float(1.0 - np.square(error).sum() / denominator),
-        "bias": float(error.mean()),
-        "signed_error_p05": float(np.percentile(error, 5)),
-        "signed_error_p50": float(np.percentile(error, 50)),
-        "signed_error_p95": float(np.percentile(error, 95)),
-        "absolute_error_p50": float(np.percentile(absolute, 50)),
-        "absolute_error_p90": float(np.percentile(absolute, 90)),
-        "absolute_error_p95": float(np.percentile(absolute, 95)),
-        "absolute_error_p99": float(np.percentile(absolute, 99)),
-    }
 
 
 def calculate_analysis(aligned: AlignedPredictions) -> tuple[dict[str, Any], list[dict[str, Any]]]:

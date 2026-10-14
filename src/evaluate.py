@@ -10,7 +10,13 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
+from src.evaluation import (
+    prediction_table_from_columns,
+    regression_metrics,
+    residual_metrics,
+)
 from src.models import DeepHPMNN
+from src.protocol import CORE_PREDICTION_COLUMNS, PHYSICS_PREDICTION_COLUMNS
 
 
 @dataclass(frozen=True)
@@ -72,20 +78,19 @@ def evaluate_model(
     columns["predicted_soh"] = 1.0 - columns["predicted_pcl"]
     columns["soh_error"] = columns["predicted_soh"] - columns["target_soh"]
 
-    error = columns["soh_error"].astype(np.float64)
-    target = columns["target_soh"].astype(np.float64)
-    residual = columns["physics_residual"].astype(np.float64)
-    total_sum_of_squares = np.square(target - target.mean()).sum()
-    if total_sum_of_squares == 0:
-        raise ValueError("Evaluation target is constant; R2 is undefined")
+    table = prediction_table_from_columns(columns, require_physics=True)
+    common_metrics = regression_metrics(
+        table.columns["target_soh"], table.columns["predicted_soh"]
+    )
+    physics_metrics = residual_metrics(table.columns["physics_residual"])
     metrics = EvaluationMetrics(
-        records=int(target.size),
-        batteries=int(np.unique(columns["battery_id"]).size),
-        soh_mae=float(np.abs(error).mean()),
-        soh_rmse=float(np.sqrt(np.square(error).mean())),
-        soh_r2=float(1.0 - np.square(error).sum() / total_sum_of_squares),
-        physical_residual_mae=float(np.abs(residual).mean()),
-        physical_residual_rmse=float(np.sqrt(np.square(residual).mean())),
+        records=table.records,
+        batteries=len(table.battery_ids),
+        soh_mae=common_metrics["mae"],
+        soh_rmse=common_metrics["rmse"],
+        soh_r2=common_metrics["r2"],
+        physical_residual_mae=physics_metrics["physical_residual_mae"],
+        physical_residual_rmse=physics_metrics["physical_residual_rmse"],
     )
     metric_values = [
         value
@@ -104,18 +109,7 @@ def save_evaluation(result: EvaluationResult, output_dir: Path) -> None:
     (output_dir / "test_metrics.json").write_text(
         json.dumps(asdict(result.metrics), indent=2) + "\n", encoding="utf-8"
     )
-    column_order = (
-        "battery_id",
-        "cycle",
-        "target_pcl",
-        "predicted_pcl",
-        "target_soh",
-        "predicted_soh",
-        "soh_error",
-        "time_derivative",
-        "dynamics",
-        "physics_residual",
-    )
+    column_order = CORE_PREDICTION_COLUMNS + PHYSICS_PREDICTION_COLUMNS
     matrix = np.column_stack([result.columns[name] for name in column_order])
     np.savetxt(
         output_dir / "test_predictions.csv",
