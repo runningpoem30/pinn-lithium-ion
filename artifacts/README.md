@@ -27,3 +27,9 @@ training summary, held-out test metrics, and cycle-level predictions with
 physics residuals and battery IDs. The root JSON, CSV, and Markdown reports
 summarize all three seeds using the mean and sample standard deviation; no seed
 is selected using test performance.
+
+`deephpm/analysis/` contains the Step 7 read-only analysis of those frozen
+predictions. It includes aligned three-seed ensemble predictions, aggregate and
+per-battery metrics, and eight presentation figures in 300-DPI PNG, SVG, and
+PDF formats. Generate it with `python -m src.analyze_final`; this command does
+not load a checkpoint or retrain a model.

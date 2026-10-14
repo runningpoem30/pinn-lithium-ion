@@ -1,0 +1,102 @@
+{
+  "method": "equal-weight mean of aligned seed predictions",
+  "alignment_key": [
+    "battery_id",
+    "cycle"
+  ],
+  "seeds": [
+    1234,
+    2345,
+    3456
+  ],
+  "records": 41240,
+  "batteries": 40,
+  "ensemble_metrics": {
+    "mae": 0.0131590969870021,
+    "rmse": 0.015474042685780957,
+    "r2": 0.8490066353634981,
+    "bias": 0.012808160547160526,
+    "signed_error_p05": -0.0008188416516666682,
+    "signed_error_p50": 0.013193726533333339,
+    "signed_error_p95": 0.02710033754833327,
+    "absolute_error_p50": 0.013193726533333339,
+    "absolute_error_p90": 0.02264284491333337,
+    "absolute_error_p95": 0.02710033754833327,
+    "absolute_error_p99": 0.03617931760366672
+  },
+  "per_seed_metrics": [
+    {
+      "seed": 1234,
+      "mae": 0.014210447593596022,
+      "rmse": 0.016587479481399374,
+      "r2": 0.8264953658146358,
+      "bias": 0.013946136620957809,
+      "signed_error_p05": -5.319124000004992e-05,
+      "signed_error_p50": 0.014950573450000004,
+      "signed_error_p95": 0.02990185614499996,
+      "absolute_error_p50": 0.014950573450000004,
+      "absolute_error_p90": 0.024169909890000008,
+      "absolute_error_p95": 0.02990185614499996,
+      "absolute_error_p99": 0.038498032676000014
+    },
+    {
+      "seed": 2345,
+      "mae": 0.014395695745346751,
+      "rmse": 0.016636168992149807,
+      "r2": 0.8254752886741314,
+      "bias": 0.01415064659751455,
+      "signed_error_p05": 0.0004060178600000131,
+      "signed_error_p50": 0.014205366350000026,
+      "signed_error_p95": 0.028452882155000015,
+      "absolute_error_p50": 0.014205366350000026,
+      "absolute_error_p90": 0.025394928449999972,
+      "absolute_error_p95": 0.028452882155000015,
+      "absolute_error_p99": 0.03745244620300005
+    },
+    {
+      "seed": 3456,
+      "mae": 0.0113603465003613,
+      "rmse": 0.013771095961933617,
+      "r2": 0.8804120858735184,
+      "bias": 0.010327698423009212,
+      "signed_error_p05": -0.004335394465000003,
+      "signed_error_p50": 0.010242402549999974,
+      "signed_error_p95": 0.02495531740999998,
+      "absolute_error_p50": 0.010452300299999995,
+      "absolute_error_p90": 0.02101281877000004,
+      "absolute_error_p95": 0.02495531740999998,
+      "absolute_error_p99": 0.034043141632000035
+    }
+  ],
+  "across_seed_metrics": {
+    "mae": {
+      "mean": 0.013322163279768024,
+      "sample_std": 0.0017015061053087927
+    },
+    "rmse": {
+      "mean": 0.015664914811827597,
+      "sample_std": 0.0016402759049241088
+    },
+    "r2": {
+      "mean": 0.8441275801207618,
+      "sample_std": 0.03142744274729508
+    },
+    "bias": {
+      "mean": 0.012808160547160524,
+      "sample_std": 0.002150575584498191
+    }
+  },
+  "prediction_uncertainty": {
+    "mean_seed_std": 0.002789248167747275,
+    "p95_seed_std": 0.006778388742545198,
+    "max_seed_std": 0.011098358935254812
+  },
+  "representative_batteries": {
+    "selection": "lowest, median, and highest ensemble RMSE",
+    "battery_ids": [
+      123,
+      109,
+      122
+    ]
+  }
+}
