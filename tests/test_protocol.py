@@ -13,6 +13,7 @@ from src.evaluation import (
 )
 from src.protocol import (
     ArtifactLayout,
+    COMMON_METRICS,
     CORE_PREDICTION_COLUMNS,
     FIXED_SEEDS,
     ModelType,
@@ -172,3 +173,37 @@ def test_completed_deephpm_runs_satisfy_frozen_protocol():
         assert np.isclose(current["mae"], saved["soh_mae"], atol=1e-10)
         assert np.isclose(current["rmse"], saved["soh_rmse"], atol=1e-10)
         assert np.isclose(current["r2"], saved["soh_r2"], atol=1e-10)
+
+
+def test_completed_verhulst_runs_satisfy_frozen_protocol():
+    reference_values = np.genfromtxt(
+        "artifacts/protocol/soh_test_reference.csv",
+        delimiter=",",
+        names=True,
+        dtype=np.float64,
+    )
+    reference = {
+        name: np.asarray(reference_values[name]) for name in reference_values.dtype.names
+    }
+    layout = ArtifactLayout()
+    results = json.loads(
+        Path("artifacts/verhulst/final/final_results.json").read_text()
+    )
+    from src.evaluation import load_prediction_csv
+
+    for saved in results["per_seed"]:
+        seed = saved["seed"]
+        run_dir = layout.seed_dir(ModelType.VERHULST, seed)
+        validate_final_seed_artifacts(
+            model_type=ModelType.VERHULST,
+            seed=seed,
+            run_dir=run_dir,
+            reference_scalers=Path("artifacts/data_scalers.npz"),
+            reference_columns=reference,
+        )
+        table = load_prediction_csv(
+            run_dir / "test_predictions.csv", require_physics=True
+        )
+        current = calculate_soh_metrics(table)
+        for name in COMMON_METRICS:
+            assert np.isclose(current[name], saved[name], atol=1e-10)

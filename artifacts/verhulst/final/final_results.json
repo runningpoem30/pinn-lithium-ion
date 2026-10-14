@@ -1,0 +1,165 @@
+{
+  "experiment": "VerhulstPINN SoH final multi-seed evaluation",
+  "model_type": "verhulst",
+  "physics_weight": 0.01,
+  "physics_weight_source": "artifacts/verhulst/physics_weight_tuning/tuning_report.json",
+  "model_selection_data": "validation split only",
+  "test_evaluation_timing": "once per seed after best checkpoint restoration",
+  "state_definition": "U = PCL = 1 - SoH",
+  "per_seed": [
+    {
+      "seed": 1234,
+      "best_epoch": 21,
+      "epochs_completed": 31,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 0.01368378809247632,
+      "rmse": 0.015950623506678332,
+      "r2": 0.8395626019329873,
+      "bias": 0.01333198439543046,
+      "signed_error_p05": -0.0005140602588653562,
+      "signed_error_p50": 0.013778448104858398,
+      "signed_error_p95": 0.028477454185485838,
+      "absolute_error_p50": 0.013778448104858398,
+      "absolute_error_p90": 0.023630696535110473,
+      "absolute_error_p95": 0.028477454185485838,
+      "absolute_error_p99": 0.03656656324863434,
+      "physical_residual_mae": 0.00010645620557315198,
+      "physical_residual_rmse": 0.0001437804066512896,
+      "soh_mae": 0.01368378809247632,
+      "soh_rmse": 0.015950623506678332,
+      "soh_r2": 0.8395626019329873,
+      "rate_r_per_cycle": 0.003912921994924545,
+      "capacity_K_pcl": 0.4501921534538269,
+      "offset_C_pcl": 0.01257405150681734
+    },
+    {
+      "seed": 2345,
+      "best_epoch": 31,
+      "epochs_completed": 41,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 0.013089305393679643,
+      "rmse": 0.015350017771062825,
+      "r2": 0.8514173681067341,
+      "bias": 0.012544295963561153,
+      "signed_error_p05": -0.0016223788261413566,
+      "signed_error_p50": 0.012605279684066772,
+      "signed_error_p95": 0.02685984671115875,
+      "absolute_error_p50": 0.012734323740005493,
+      "absolute_error_p90": 0.023310297727584833,
+      "absolute_error_p95": 0.02685984671115875,
+      "absolute_error_p99": 0.034089031815528914,
+      "physical_residual_mae": 8.907146372672933e-05,
+      "physical_residual_rmse": 0.00012309381014609564,
+      "soh_mae": 0.013089305393679643,
+      "soh_rmse": 0.015350017771062825,
+      "soh_r2": 0.8514173681067341,
+      "rate_r_per_cycle": 0.003579780226573348,
+      "capacity_K_pcl": 0.43125274777412415,
+      "offset_C_pcl": 0.013658235780894756
+    },
+    {
+      "seed": 3456,
+      "best_epoch": 29,
+      "epochs_completed": 39,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 0.010657835725033664,
+      "rmse": 0.013070788937989046,
+      "r2": 0.8922657269730644,
+      "bias": 0.009407140013954226,
+      "signed_error_p05": -0.005412280559539795,
+      "signed_error_p50": 0.009410858154296875,
+      "signed_error_p95": 0.0243259012699127,
+      "absolute_error_p50": 0.009652584791183472,
+      "absolute_error_p90": 0.020286041498184203,
+      "absolute_error_p95": 0.0243259012699127,
+      "absolute_error_p99": 0.03180129408836366,
+      "physical_residual_mae": 9.87020213284181e-05,
+      "physical_residual_rmse": 0.00013221677474615167,
+      "soh_mae": 0.010657835725033664,
+      "soh_rmse": 0.013070788937989046,
+      "soh_r2": 0.8922657269730644,
+      "rate_r_per_cycle": 0.0036318411584943533,
+      "capacity_K_pcl": 0.43433189392089844,
+      "offset_C_pcl": 0.01349332183599472
+    }
+  ],
+  "aggregate": {
+    "num_seeds": 3,
+    "seeds": [
+      1234,
+      2345,
+      3456
+    ],
+    "standard_deviation": "sample (ddof=1)",
+    "mae": {
+      "mean": 0.012476976403729877,
+      "std": 0.001603217710249494
+    },
+    "rmse": {
+      "mean": 0.014790476738576733,
+      "std": 0.0015192683801853945
+    },
+    "r2": {
+      "mean": 0.861081899004262,
+      "std": 0.027648819420536815
+    },
+    "bias": {
+      "mean": 0.011761140124315282,
+      "std": 0.0020763190159775718
+    },
+    "signed_error_p05": {
+      "mean": -0.0025162398815155025,
+      "std": 0.0025685367854521245
+    },
+    "signed_error_p50": {
+      "mean": 0.011931528647740683,
+      "std": 0.0022604016984320205
+    },
+    "signed_error_p95": {
+      "mean": 0.02655440072218576,
+      "std": 0.002092563222900498
+    },
+    "absolute_error_p50": {
+      "mean": 0.012055118878682455,
+      "std": 0.0021451518485915626
+    },
+    "absolute_error_p90": {
+      "mean": 0.02240901192029317,
+      "std": 0.0018455125057360367
+    },
+    "absolute_error_p95": {
+      "mean": 0.02655440072218576,
+      "std": 0.002092563222900498
+    },
+    "absolute_error_p99": {
+      "mean": 0.034152296384175634,
+      "std": 0.0023832644307107955
+    },
+    "physical_residual_mae": {
+      "mean": 9.807656354276648e-05,
+      "std": 8.709231329337504e-06
+    },
+    "physical_residual_rmse": {
+      "mean": 0.0001330303305145123,
+      "std": 1.036726692447679e-05
+    },
+    "rate_r_per_cycle": {
+      "mean": 0.003708181126664082,
+      "std": 0.00017921133477031276
+    },
+    "capacity_K_pcl": {
+      "mean": 0.4385922650496165,
+      "std": 0.0101630873011551
+    },
+    "offset_C_pcl": {
+      "mean": 0.013241869707902273,
+      "std": 0.0005841960412231999
+    }
+  }
+}

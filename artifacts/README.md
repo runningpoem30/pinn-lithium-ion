@@ -54,3 +54,16 @@ per-battery metrics, and six presentation figures in 300-DPI PNG, SVG, and PDF
 formats. Generate it with `python -m src.analyze_baseline`; the command reads
 saved predictions and histories only, and neither loads a checkpoint nor
 retrains the baseline.
+
+`verhulst/physics_weight_tuning/` contains the Step 11 single-seed,
+validation-only sweep over physics weights `0.001`, `0.01`, `0.1`, and `1.0`.
+The report selects `0.01` by validation SoH RMSE; no final-test predictions are
+stored anywhere in the tuning directory.
+
+`verhulst/final/` contains the Step 11 three-seed VerhulstPINN SoH experiment
+using the validation-selected weight. Each seed directory contains the same
+required checkpoint, training-only scalers, resolved configuration, history,
+training summary, test metrics, and cycle-level prediction artifacts as the
+other models, plus the learned constrained `r`, `K`, and `C` values. The final
+test batteries are evaluated once per seed only after restoring the
+validation-selected checkpoint.

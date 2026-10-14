@@ -364,14 +364,15 @@ def build_protocol_artifacts(
     reference = save_test_reference(bundle, reference_path)
 
     layout = ArtifactLayout()
-    for seed in FIXED_SEEDS:
-        validate_final_seed_artifacts(
-            model_type=ModelType.DEEPHPM,
-            seed=seed,
-            run_dir=layout.seed_dir(ModelType.DEEPHPM, seed),
-            reference_scalers=scaler_path,
-            reference_columns=reference,
-        )
+    for model_type in ModelType:
+        for seed in FIXED_SEEDS:
+            validate_final_seed_artifacts(
+                model_type=model_type,
+                seed=seed,
+                run_dir=layout.seed_dir(model_type, seed),
+                reference_scalers=scaler_path,
+                reference_columns=reference,
+            )
     manifest = protocol_manifest(scaler_path=scaler_path, reference_columns=reference)
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "soh_comparison_protocol.json").write_text(

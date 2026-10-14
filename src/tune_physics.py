@@ -15,7 +15,7 @@ import yaml
 
 from src.config import DataConfig, ExperimentConfig, ModelConfig, TrainingConfig
 from src.data import create_data_loaders, load_battery_data
-from src.models import DeepHPMNN
+from src.models import DeepHPMNN, VerhulstPINN
 from src.train import build_model, fit, resolve_device, set_random_seed
 
 
@@ -90,7 +90,7 @@ def load_tuning_config(path: Path) -> PhysicsTuningConfig:
 
 def evaluate_validation(
     *,
-    model: DeepHPMNN,
+    model: DeepHPMNN | VerhulstPINN,
     loader: torch.utils.data.DataLoader,
     physics_weight: float,
     device: torch.device,

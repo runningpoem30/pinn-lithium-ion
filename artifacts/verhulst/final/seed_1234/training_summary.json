@@ -1,0 +1,15 @@
+{
+  "best_epoch": 21,
+  "best_validation_loss": 0.045943739500264806,
+  "epochs_completed": 31,
+  "stopped_early": true,
+  "device": "cpu",
+  "early_stopping_monitor": "data",
+  "learned_verhulst_parameters": {
+    "state": "U = PCL = 1 - SoH",
+    "rate_r_per_cycle": 0.003912921994924545,
+    "capacity_K_pcl": 0.4501921534538269,
+    "offset_C_pcl": 0.01257405150681734,
+    "residual_units": "PCL per physical cycle"
+  }
+}

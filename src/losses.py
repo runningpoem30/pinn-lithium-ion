@@ -1,4 +1,4 @@
-"""Loss functions for DeepHPM training."""
+"""Shared loss functions for physics-informed model training."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from dataclasses import dataclass
 import torch
 from torch import nn
 
-from src.models import DeepHPMOutput
+from src.models import DeepHPMOutput, VerhulstOutput
 
 
 @dataclass(frozen=True)
@@ -18,11 +18,12 @@ class DeepHPMLossValues:
 
 
 class DeepHPMLoss(nn.Module):
-    """Mean data loss plus a weighted learned-dynamics residual loss.
+    """Mean data loss plus a weighted physical-dynamics residual loss.
 
     Both terms use normalized quantities so their magnitude is not an artifact
     of the physical PCL and cycle units. Physical predictions and residuals are
-    still available in :class:`src.models.DeepHPMOutput` for reporting.
+    still available in the model output for reporting. The shared output
+    convention lets this loss train either DeepHPMNN or VerhulstPINN.
     """
 
     def __init__(self, physics_weight: float) -> None:
@@ -33,7 +34,7 @@ class DeepHPMLoss(nn.Module):
 
     def forward(
         self,
-        output: DeepHPMOutput,
+        output: DeepHPMOutput | VerhulstOutput,
         target_pcl_normalized: torch.Tensor,
     ) -> DeepHPMLossValues:
         if target_pcl_normalized.shape != output.pcl_normalized.shape:

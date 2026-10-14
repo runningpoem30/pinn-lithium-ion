@@ -6,6 +6,10 @@ The final goal is to move from a conventional data-driven neural network to a **
 
 The project is being developed progressively rather than building the complete PINN system at once.
 
+The clean shifted-Verhulst formulation, state convention, constrained parameter
+transforms, and residual units are documented in
+[`docs/verhulst_pinn.md`](docs/verhulst_pinn.md).
+
 ```text
 Battery Data
      ↓

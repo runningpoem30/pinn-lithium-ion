@@ -1,0 +1,7 @@
+{
+  "state": "U = PCL = 1 - SoH",
+  "rate_r_per_cycle": 0.0036318411584943533,
+  "capacity_K_pcl": 0.43433189392089844,
+  "offset_C_pcl": 0.01349332183599472,
+  "residual_units": "PCL per physical cycle"
+}

@@ -15,7 +15,7 @@ from src.evaluation import (
     regression_metrics,
     residual_metrics,
 )
-from src.models import DeepHPMNN
+from src.models import DeepHPMNN, VerhulstPINN
 from src.protocol import CORE_PREDICTION_COLUMNS, PHYSICS_PREDICTION_COLUMNS
 
 
@@ -38,7 +38,7 @@ class EvaluationResult:
 
 def evaluate_model(
     *,
-    model: DeepHPMNN,
+    model: DeepHPMNN | VerhulstPINN,
     loader: DataLoader,
     device: torch.device,
 ) -> EvaluationResult:

@@ -1,0 +1,75 @@
+{
+  "experiment": "VerhulstPINN SoH physics-weight tuning",
+  "selection_rule": "Lowest validation SoH RMSE; physical residual RMSE is the tie-breaker",
+  "selected_physics_weight": 0.01,
+  "final_test_set_used": false,
+  "shared_seed": 1234,
+  "candidate_weights": [
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "results": [
+    {
+      "physics_weight": 0.001,
+      "best_epoch": 21,
+      "epochs_completed": 25,
+      "stopped_early": false,
+      "records": 30457,
+      "soh_rmse": 0.010060265267414712,
+      "soh_r2": 0.9527800981531797,
+      "physical_residual_mae": 0.00011764856495420065,
+      "physical_residual_rmse": 0.0001570537102339444,
+      "normalized_data_loss": 0.04735648022836286,
+      "normalized_physics_loss": 1.4786718407335433,
+      "weighted_physics_loss": 0.0014786718407335433,
+      "normalized_total_loss": 0.04883515206909641
+    },
+    {
+      "physics_weight": 0.01,
+      "best_epoch": 21,
+      "epochs_completed": 25,
+      "stopped_early": false,
+      "records": 30457,
+      "soh_rmse": 0.009909069986726072,
+      "soh_r2": 0.9541887642399471,
+      "physical_residual_mae": 0.00011128249303223724,
+      "physical_residual_rmse": 0.0001516916052956791,
+      "normalized_data_loss": 0.04594373972960514,
+      "normalized_physics_loss": 1.3794262804583166,
+      "weighted_physics_loss": 0.013794262804583166,
+      "normalized_total_loss": 0.0597380025341883
+    },
+    {
+      "physics_weight": 0.1,
+      "best_epoch": 18,
+      "epochs_completed": 24,
+      "stopped_early": true,
+      "records": 30457,
+      "soh_rmse": 0.011473707525820564,
+      "soh_r2": 0.9385794408498384,
+      "physical_residual_mae": 9.056316293488482e-05,
+      "physical_residual_rmse": 0.00013351366594065237,
+      "normalized_data_loss": 0.06159821137378082,
+      "normalized_physics_loss": 1.0686287212953254,
+      "weighted_physics_loss": 0.10686287212953255,
+      "normalized_total_loss": 0.16846108350331337
+    },
+    {
+      "physics_weight": 1.0,
+      "best_epoch": 24,
+      "epochs_completed": 25,
+      "stopped_early": false,
+      "records": 30457,
+      "soh_rmse": 0.019287872616808754,
+      "soh_r2": 0.826429915948871,
+      "physical_residual_mae": 4.747866597138092e-05,
+      "physical_residual_rmse": 8.02403368007176e-05,
+      "normalized_data_loss": 0.1740721164619715,
+      "normalized_physics_loss": 0.3859765206387573,
+      "weighted_physics_loss": 0.3859765206387573,
+      "normalized_total_loss": 0.5600486371007288
+    }
+  ]
+}

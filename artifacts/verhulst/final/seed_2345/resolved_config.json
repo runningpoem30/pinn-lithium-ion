@@ -1,0 +1,49 @@
+{
+  "data": {
+    "dataset_path": "SeversonBattery.mat",
+    "batch_size": 2048,
+    "num_workers": 0
+  },
+  "model": {
+    "surrogate_hidden_dims": [
+      64,
+      64
+    ],
+    "dynamics_hidden_dims": [
+      32,
+      32
+    ]
+  },
+  "training": {
+    "seed": 2345,
+    "epochs": 60,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "physics_weight": 0.01,
+    "gradient_clip_norm": 5.0,
+    "early_stopping_patience": 10,
+    "early_stopping_min_delta": 0.0001,
+    "early_stopping_monitor": "data",
+    "device": "cpu",
+    "max_train_batches": null,
+    "max_validation_batches": null
+  },
+  "output_dir": "artifacts/verhulst/final/seed_2345",
+  "model_type": "verhulst",
+  "state_definition": "U = PCL = 1 - SoH",
+  "physics_residual": "dU/dcycle - r(U-C)(1-(U-C)/(K-C))",
+  "verhulst_parameter_config": {
+    "initial_rate": 0.005,
+    "initial_capacity": 0.5,
+    "initial_offset": 0.01,
+    "capacity_bounds": [
+      0.2,
+      1.0
+    ],
+    "offset_bounds": [
+      0.0,
+      0.1
+    ],
+    "rate_epsilon": 1e-08
+  }
+}

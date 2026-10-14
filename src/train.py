@@ -25,7 +25,7 @@ from src.data import (
     load_battery_data,
 )
 from src.losses import DeepHPMLoss
-from src.models import DeepHPMNN
+from src.models import DeepHPMNN, VerhulstPINN
 
 
 @dataclass(frozen=True)
@@ -123,7 +123,7 @@ def _iter_limited(
 
 def run_epoch(
     *,
-    model: DeepHPMNN,
+    model: DeepHPMNN | VerhulstPINN,
     loader: DataLoader,
     criterion: DeepHPMLoss,
     device: torch.device,
@@ -233,7 +233,7 @@ def save_history(history: list[EpochRecord], path: Path) -> None:
 
 def fit(
     *,
-    model: DeepHPMNN,
+    model: DeepHPMNN | VerhulstPINN,
     loaders: BatteryDataLoaders,
     scalers: DatasetScalers,
     experiment_config: ExperimentConfig,
