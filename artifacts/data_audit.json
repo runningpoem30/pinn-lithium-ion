@@ -1,0 +1,1457 @@
+{
+  "num_records": 99281,
+  "num_batteries": 124,
+  "num_features": 8,
+  "model_input_width_with_cycle": 9,
+  "feature_names": [
+    "slope",
+    "intercept",
+    "average_temperature",
+    "internal_resistance",
+    "charge_time",
+    "dQdV_max",
+    "dQdV_min",
+    "dQdV_variance"
+  ],
+  "array_quality": {
+    "Features_mov_Flt": {
+      "shape": [
+        99281,
+        8
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": -12.150636192548166,
+      "maximum": 142.34386166666636,
+      "mean": 5.237638227020473,
+      "standard_deviation": 11.815219339249248
+    },
+    "RUL_Flt": {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": 0.0,
+      "maximum": 2235.0,
+      "mean": 489.74639659149284,
+      "standard_deviation": 390.27680445212866
+    },
+    "PCL_Flt": {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": 0.0015150909090909659,
+      "maximum": 0.2015526235795455,
+      "mean": 0.06054608037494135,
+      "standard_deviation": 0.0438622801842798
+    },
+    "Cycles_Flt": {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": 1.0,
+      "maximum": 2236.0,
+      "mean": 490.3310099616241,
+      "standard_deviation": 390.2012382162992
+    }
+  },
+  "feature_quality": [
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": -4.773463676142078,
+      "maximum": 2.028140583129035,
+      "mean": 0.009057808001445011,
+      "standard_deviation": 0.05378361490941094,
+      "name": "slope",
+      "constant": false
+    },
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": -0.6083170395370497,
+      "maximum": 6.0188405791210595,
+      "mean": 0.012366539703284905,
+      "standard_deviation": 0.06116834372303825,
+      "name": "intercept",
+      "constant": false
+    },
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": 26.04008439674689,
+      "maximum": 39.15845491508351,
+      "mean": 34.08127781436028,
+      "standard_deviation": 1.8746571920470783,
+      "name": "average_temperature",
+      "constant": false
+    },
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": 0.013171018999999999,
+      "maximum": 0.023536901,
+      "mean": 0.016565788468968758,
+      "standard_deviation": 0.0011896864183151713,
+      "name": "internal_resistance",
+      "constant": false
+    },
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": 8.896850166666603,
+      "maximum": 142.34386166666636,
+      "mean": 11.019717951946458,
+      "standard_deviation": 2.403307733329677,
+      "name": "charge_time",
+      "constant": false
+    },
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": -0.1497901752714186,
+      "maximum": -0.03376730526382503,
+      "mean": -0.12106339393266706,
+      "standard_deviation": 0.020214499356054287,
+      "name": "dQdV_max",
+      "constant": false
+    },
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": -12.150636192548166,
+      "maximum": -3.578525869989075,
+      "mean": -5.926631097770367,
+      "standard_deviation": 0.7745253103759824,
+      "name": "dQdV_min",
+      "constant": false
+    },
+    {
+      "shape": [
+        99281
+      ],
+      "nan_count": 0,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "minimum": 1.0296988086376935,
+      "maximum": 5.842715876614288,
+      "mean": 2.8098144053863834,
+      "standard_deviation": 0.5983948161292411,
+      "name": "dQdV_variance",
+      "constant": false
+    }
+  ],
+  "constant_features": [],
+  "total_invalid_values": 0,
+  "battery_cycle_counts": [
+    1850,
+    2158,
+    2235,
+    1432,
+    1707,
+    1072,
+    634,
+    868,
+    1052,
+    786,
+    878,
+    717,
+    860,
+    855,
+    689,
+    786,
+    532,
+    557,
+    1012,
+    1015,
+    852,
+    868,
+    840,
+    858,
+    915,
+    707,
+    874,
+    729,
+    755,
+    740,
+    701,
+    702,
+    646,
+    615,
+    623,
+    964,
+    1049,
+    700,
+    649,
+    614,
+    597,
+    300,
+    148,
+    438,
+    335,
+    444,
+    480,
+    511,
+    561,
+    477,
+    458,
+    483,
+    485,
+    494,
+    487,
+    461,
+    502,
+    489,
+    513,
+    527,
+    495,
+    461,
+    471,
+    468,
+    509,
+    498,
+    481,
+    492,
+    519,
+    520,
+    499,
+    463,
+    535,
+    478,
+    465,
+    459,
+    499,
+    429,
+    466,
+    462,
+    457,
+    487,
+    429,
+    713,
+    1008,
+    1062,
+    1114,
+    1047,
+    827,
+    666,
+    1835,
+    827,
+    1038,
+    1077,
+    816,
+    931,
+    815,
+    857,
+    875,
+    1637,
+    1314,
+    1145,
+    1154,
+    812,
+    771,
+    1001,
+    824,
+    988,
+    1027,
+    849,
+    540,
+    857,
+    934,
+    730,
+    1283,
+    1157,
+    1092,
+    922,
+    1934,
+    1155,
+    795,
+    785,
+    939,
+    1800
+  ],
+  "minimum_cycles_per_battery": 148,
+  "maximum_cycles_per_battery": 2235,
+  "split_source_mapping": {
+    "train": "train_ind",
+    "validation": "test_ind",
+    "test": "secondary_test_ind"
+  },
+  "splits": {
+    "train": [
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60,
+      62,
+      64,
+      66,
+      68,
+      70,
+      72,
+      74,
+      76,
+      78,
+      80,
+      82
+    ],
+    "validation": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      25,
+      27,
+      29,
+      31,
+      33,
+      35,
+      37,
+      39,
+      41,
+      43,
+      45,
+      47,
+      49,
+      51,
+      53,
+      55,
+      57,
+      59,
+      61,
+      63,
+      65,
+      67,
+      69,
+      71,
+      73,
+      75,
+      77,
+      79,
+      81,
+      83,
+      84
+    ],
+    "test": [
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124
+    ]
+  },
+  "split_counts": {
+    "train": 41,
+    "validation": 43,
+    "test": 40
+  },
+  "split_record_counts": {
+    "train": 27584,
+    "validation": 30457,
+    "test": 41240
+  },
+  "unassigned_battery_ids": [],
+  "batteries_with_non_increasing_cycles": [],
+  "batteries_with_negative_rul": [],
+  "battery_boundaries": [
+    {
+      "battery_id": 1,
+      "start": 0,
+      "stop": 1850,
+      "num_cycles": 1850,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 2,
+      "start": 1850,
+      "stop": 4008,
+      "num_cycles": 2158,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 3,
+      "start": 4008,
+      "stop": 6243,
+      "num_cycles": 2235,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 4,
+      "start": 6243,
+      "stop": 7675,
+      "num_cycles": 1432,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 5,
+      "start": 7675,
+      "stop": 9382,
+      "num_cycles": 1707,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 6,
+      "start": 9382,
+      "stop": 10454,
+      "num_cycles": 1072,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 7,
+      "start": 10454,
+      "stop": 11088,
+      "num_cycles": 634,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 8,
+      "start": 11088,
+      "stop": 11956,
+      "num_cycles": 868,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 9,
+      "start": 11956,
+      "stop": 13008,
+      "num_cycles": 1052,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 10,
+      "start": 13008,
+      "stop": 13794,
+      "num_cycles": 786,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 11,
+      "start": 13794,
+      "stop": 14672,
+      "num_cycles": 878,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 12,
+      "start": 14672,
+      "stop": 15389,
+      "num_cycles": 717,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 13,
+      "start": 15389,
+      "stop": 16249,
+      "num_cycles": 860,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 14,
+      "start": 16249,
+      "stop": 17104,
+      "num_cycles": 855,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 15,
+      "start": 17104,
+      "stop": 17793,
+      "num_cycles": 689,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 16,
+      "start": 17793,
+      "stop": 18579,
+      "num_cycles": 786,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 17,
+      "start": 18579,
+      "stop": 19111,
+      "num_cycles": 532,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 18,
+      "start": 19111,
+      "stop": 19668,
+      "num_cycles": 557,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 19,
+      "start": 19668,
+      "stop": 20680,
+      "num_cycles": 1012,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 20,
+      "start": 20680,
+      "stop": 21695,
+      "num_cycles": 1015,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 21,
+      "start": 21695,
+      "stop": 22547,
+      "num_cycles": 852,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 22,
+      "start": 22547,
+      "stop": 23415,
+      "num_cycles": 868,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 23,
+      "start": 23415,
+      "stop": 24255,
+      "num_cycles": 840,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 24,
+      "start": 24255,
+      "stop": 25113,
+      "num_cycles": 858,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 25,
+      "start": 25113,
+      "stop": 26028,
+      "num_cycles": 915,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 26,
+      "start": 26028,
+      "stop": 26735,
+      "num_cycles": 707,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 27,
+      "start": 26735,
+      "stop": 27609,
+      "num_cycles": 874,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 28,
+      "start": 27609,
+      "stop": 28338,
+      "num_cycles": 729,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 29,
+      "start": 28338,
+      "stop": 29093,
+      "num_cycles": 755,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 30,
+      "start": 29093,
+      "stop": 29833,
+      "num_cycles": 740,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 31,
+      "start": 29833,
+      "stop": 30534,
+      "num_cycles": 701,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 32,
+      "start": 30534,
+      "stop": 31236,
+      "num_cycles": 702,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 33,
+      "start": 31236,
+      "stop": 31882,
+      "num_cycles": 646,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 34,
+      "start": 31882,
+      "stop": 32497,
+      "num_cycles": 615,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 35,
+      "start": 32497,
+      "stop": 33120,
+      "num_cycles": 623,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 36,
+      "start": 33120,
+      "stop": 34084,
+      "num_cycles": 964,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 37,
+      "start": 34084,
+      "stop": 35133,
+      "num_cycles": 1049,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 38,
+      "start": 35133,
+      "stop": 35833,
+      "num_cycles": 700,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 39,
+      "start": 35833,
+      "stop": 36482,
+      "num_cycles": 649,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 40,
+      "start": 36482,
+      "stop": 37096,
+      "num_cycles": 614,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 41,
+      "start": 37096,
+      "stop": 37693,
+      "num_cycles": 597,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 42,
+      "start": 37693,
+      "stop": 37993,
+      "num_cycles": 300,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 43,
+      "start": 37993,
+      "stop": 38141,
+      "num_cycles": 148,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 44,
+      "start": 38141,
+      "stop": 38579,
+      "num_cycles": 438,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 45,
+      "start": 38579,
+      "stop": 38914,
+      "num_cycles": 335,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 46,
+      "start": 38914,
+      "stop": 39358,
+      "num_cycles": 444,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 47,
+      "start": 39358,
+      "stop": 39838,
+      "num_cycles": 480,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 48,
+      "start": 39838,
+      "stop": 40349,
+      "num_cycles": 511,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 49,
+      "start": 40349,
+      "stop": 40910,
+      "num_cycles": 561,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 50,
+      "start": 40910,
+      "stop": 41387,
+      "num_cycles": 477,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 51,
+      "start": 41387,
+      "stop": 41845,
+      "num_cycles": 458,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 52,
+      "start": 41845,
+      "stop": 42328,
+      "num_cycles": 483,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 53,
+      "start": 42328,
+      "stop": 42813,
+      "num_cycles": 485,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 54,
+      "start": 42813,
+      "stop": 43307,
+      "num_cycles": 494,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 55,
+      "start": 43307,
+      "stop": 43794,
+      "num_cycles": 487,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 56,
+      "start": 43794,
+      "stop": 44255,
+      "num_cycles": 461,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 57,
+      "start": 44255,
+      "stop": 44757,
+      "num_cycles": 502,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 58,
+      "start": 44757,
+      "stop": 45246,
+      "num_cycles": 489,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 59,
+      "start": 45246,
+      "stop": 45759,
+      "num_cycles": 513,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 60,
+      "start": 45759,
+      "stop": 46286,
+      "num_cycles": 527,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 61,
+      "start": 46286,
+      "stop": 46781,
+      "num_cycles": 495,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 62,
+      "start": 46781,
+      "stop": 47242,
+      "num_cycles": 461,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 63,
+      "start": 47242,
+      "stop": 47713,
+      "num_cycles": 471,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 64,
+      "start": 47713,
+      "stop": 48181,
+      "num_cycles": 468,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 65,
+      "start": 48181,
+      "stop": 48690,
+      "num_cycles": 509,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 66,
+      "start": 48690,
+      "stop": 49188,
+      "num_cycles": 498,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 67,
+      "start": 49188,
+      "stop": 49669,
+      "num_cycles": 481,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 68,
+      "start": 49669,
+      "stop": 50161,
+      "num_cycles": 492,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 69,
+      "start": 50161,
+      "stop": 50680,
+      "num_cycles": 519,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 70,
+      "start": 50680,
+      "stop": 51200,
+      "num_cycles": 520,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 71,
+      "start": 51200,
+      "stop": 51699,
+      "num_cycles": 499,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 72,
+      "start": 51699,
+      "stop": 52162,
+      "num_cycles": 463,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 73,
+      "start": 52162,
+      "stop": 52697,
+      "num_cycles": 535,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 74,
+      "start": 52697,
+      "stop": 53175,
+      "num_cycles": 478,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 75,
+      "start": 53175,
+      "stop": 53640,
+      "num_cycles": 465,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 76,
+      "start": 53640,
+      "stop": 54099,
+      "num_cycles": 459,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 77,
+      "start": 54099,
+      "stop": 54598,
+      "num_cycles": 499,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 78,
+      "start": 54598,
+      "stop": 55027,
+      "num_cycles": 429,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 79,
+      "start": 55027,
+      "stop": 55493,
+      "num_cycles": 466,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 80,
+      "start": 55493,
+      "stop": 55955,
+      "num_cycles": 462,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 81,
+      "start": 55955,
+      "stop": 56412,
+      "num_cycles": 457,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 82,
+      "start": 56412,
+      "stop": 56899,
+      "num_cycles": 487,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 83,
+      "start": 56899,
+      "stop": 57328,
+      "num_cycles": 429,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 84,
+      "start": 57328,
+      "stop": 58041,
+      "num_cycles": 713,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 85,
+      "start": 58041,
+      "stop": 59049,
+      "num_cycles": 1008,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 86,
+      "start": 59049,
+      "stop": 60111,
+      "num_cycles": 1062,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 87,
+      "start": 60111,
+      "stop": 61225,
+      "num_cycles": 1114,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 88,
+      "start": 61225,
+      "stop": 62272,
+      "num_cycles": 1047,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 89,
+      "start": 62272,
+      "stop": 63099,
+      "num_cycles": 827,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 90,
+      "start": 63099,
+      "stop": 63765,
+      "num_cycles": 666,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 91,
+      "start": 63765,
+      "stop": 65600,
+      "num_cycles": 1835,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 92,
+      "start": 65600,
+      "stop": 66427,
+      "num_cycles": 827,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 93,
+      "start": 66427,
+      "stop": 67465,
+      "num_cycles": 1038,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 94,
+      "start": 67465,
+      "stop": 68542,
+      "num_cycles": 1077,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 95,
+      "start": 68542,
+      "stop": 69358,
+      "num_cycles": 816,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 96,
+      "start": 69358,
+      "stop": 70289,
+      "num_cycles": 931,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 97,
+      "start": 70289,
+      "stop": 71104,
+      "num_cycles": 815,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 98,
+      "start": 71104,
+      "stop": 71961,
+      "num_cycles": 857,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 99,
+      "start": 71961,
+      "stop": 72836,
+      "num_cycles": 875,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 100,
+      "start": 72836,
+      "stop": 74473,
+      "num_cycles": 1637,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 101,
+      "start": 74473,
+      "stop": 75787,
+      "num_cycles": 1314,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 102,
+      "start": 75787,
+      "stop": 76932,
+      "num_cycles": 1145,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 103,
+      "start": 76932,
+      "stop": 78086,
+      "num_cycles": 1154,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 104,
+      "start": 78086,
+      "stop": 78898,
+      "num_cycles": 812,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 105,
+      "start": 78898,
+      "stop": 79669,
+      "num_cycles": 771,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 106,
+      "start": 79669,
+      "stop": 80670,
+      "num_cycles": 1001,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 107,
+      "start": 80670,
+      "stop": 81494,
+      "num_cycles": 824,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 108,
+      "start": 81494,
+      "stop": 82482,
+      "num_cycles": 988,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 109,
+      "start": 82482,
+      "stop": 83509,
+      "num_cycles": 1027,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 110,
+      "start": 83509,
+      "stop": 84358,
+      "num_cycles": 849,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 111,
+      "start": 84358,
+      "stop": 84898,
+      "num_cycles": 540,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 112,
+      "start": 84898,
+      "stop": 85755,
+      "num_cycles": 857,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 113,
+      "start": 85755,
+      "stop": 86689,
+      "num_cycles": 934,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 114,
+      "start": 86689,
+      "stop": 87419,
+      "num_cycles": 730,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 115,
+      "start": 87419,
+      "stop": 88702,
+      "num_cycles": 1283,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 116,
+      "start": 88702,
+      "stop": 89859,
+      "num_cycles": 1157,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 117,
+      "start": 89859,
+      "stop": 90951,
+      "num_cycles": 1092,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 118,
+      "start": 90951,
+      "stop": 91873,
+      "num_cycles": 922,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 119,
+      "start": 91873,
+      "stop": 93807,
+      "num_cycles": 1934,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 120,
+      "start": 93807,
+      "stop": 94962,
+      "num_cycles": 1155,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 121,
+      "start": 94962,
+      "stop": 95757,
+      "num_cycles": 795,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 122,
+      "start": 95757,
+      "stop": 96542,
+      "num_cycles": 785,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 123,
+      "start": 96542,
+      "stop": 97481,
+      "num_cycles": 939,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    },
+    {
+      "battery_id": 124,
+      "start": 97481,
+      "stop": 99281,
+      "num_cycles": 1800,
+      "cycle_strictly_increasing": true,
+      "negative_rul_count": 0
+    }
+  ],
+  "dataset_path": "/Users/archietans/Developer/class-codes/pinn/SeversonBattery.mat",
+  "dataset_size_bytes": 6433362
+}

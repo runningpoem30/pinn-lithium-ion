@@ -1,0 +1,10 @@
+# Step 1: dataset audit and testing
+numpy>=1.26,<3
+scipy>=1.11,<2
+pytest>=8,<9
+
+# Later DeepHPM training and evaluation steps
+torch>=2.6,<3
+scikit-learn>=1.4,<2
+matplotlib>=3.8,<4
+PyYAML>=6,<7
