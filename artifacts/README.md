@@ -14,3 +14,8 @@ Step 2 adds:
 `deephpm/smoke/` contains the bounded Step 4 CPU smoke-test checkpoint,
 resolved configuration, scaler copy, per-epoch loss history, and training summary.
 It is a software verification run, not an experimental result.
+
+`deephpm/physics_weight_tuning/` contains the Step 5 single-seed validation
+sweep, including one reproducible run directory per physics weight and compact
+JSON, CSV, and Markdown comparison reports. These are hyperparameter-selection
+results, not final test results.

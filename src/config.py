@@ -46,6 +46,7 @@ class TrainingConfig:
     gradient_clip_norm: float = 5.0
     early_stopping_patience: int = 20
     early_stopping_min_delta: float = 1e-5
+    early_stopping_monitor: str = "data"
     device: str = "auto"
     max_train_batches: int | None = None
     max_validation_batches: int | None = None
@@ -65,6 +66,8 @@ class TrainingConfig:
             raise ValueError("training.early_stopping_patience must be positive")
         if self.early_stopping_min_delta < 0:
             raise ValueError("training.early_stopping_min_delta must be non-negative")
+        if self.early_stopping_monitor not in {"data", "total"}:
+            raise ValueError("training.early_stopping_monitor must be data or total")
         if self.device not in {"auto", "cpu", "cuda", "mps"}:
             raise ValueError("training.device must be auto, cpu, cuda, or mps")
         for name, limit in (

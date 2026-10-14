@@ -282,7 +282,10 @@ def fit(
             gradient_clip_norm=training_config.gradient_clip_norm,
             maximum_batches=training_config.max_validation_batches,
         )
-        improved, should_stop = early_stopping.update(validation_metrics.total)
+        monitored_validation_loss = getattr(
+            validation_metrics, training_config.early_stopping_monitor
+        )
+        improved, should_stop = early_stopping.update(monitored_validation_loss)
         if improved:
             best_epoch = epoch
             save_checkpoint(
@@ -290,7 +293,7 @@ def fit(
                 model=model,
                 optimizer=optimizer,
                 epoch=epoch,
-                best_validation_loss=validation_metrics.total,
+                best_validation_loss=monitored_validation_loss,
             )
 
         history.append(
@@ -334,6 +337,7 @@ def fit(
                 "epochs_completed": len(result.history),
                 "stopped_early": result.stopped_early,
                 "device": str(device),
+                "early_stopping_monitor": training_config.early_stopping_monitor,
             },
             indent=2,
         )

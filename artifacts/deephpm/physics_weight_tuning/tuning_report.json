@@ -1,0 +1,68 @@
+{
+  "selection_rule": "Lowest validation SoH RMSE; physical residual RMSE is the tie-breaker",
+  "selected_physics_weight": 0.001,
+  "final_test_set_used": false,
+  "shared_seed": 1234,
+  "results": [
+    {
+      "physics_weight": 0.001,
+      "best_epoch": 21,
+      "epochs_completed": 25,
+      "stopped_early": false,
+      "records": 30457,
+      "soh_rmse": 0.010088432667920647,
+      "soh_r2": 0.9525153091342663,
+      "physical_residual_mae": 7.0447153298396245e-06,
+      "physical_residual_rmse": 9.089854927649444e-06,
+      "normalized_data_loss": 0.04762203512044077,
+      "normalized_physics_loss": 0.004953239238055143,
+      "weighted_physics_loss": 4.953239238055143e-06,
+      "normalized_total_loss": 0.047626988359678823
+    },
+    {
+      "physics_weight": 0.01,
+      "best_epoch": 21,
+      "epochs_completed": 25,
+      "stopped_early": false,
+      "records": 30457,
+      "soh_rmse": 0.010090921290704255,
+      "soh_r2": 0.9524918791203543,
+      "physical_residual_mae": 6.966528363526324e-06,
+      "physical_residual_rmse": 9.002065508303171e-06,
+      "normalized_data_loss": 0.04764553290309551,
+      "normalized_physics_loss": 0.004858024928402126,
+      "weighted_physics_loss": 4.858024928402126e-05,
+      "normalized_total_loss": 0.047694113152379536
+    },
+    {
+      "physics_weight": 0.1,
+      "best_epoch": 21,
+      "epochs_completed": 25,
+      "stopped_early": false,
+      "records": 30457,
+      "soh_rmse": 0.010117613863219098,
+      "soh_r2": 0.9522402091019662,
+      "physical_residual_mae": 6.280915370198586e-06,
+      "physical_residual_rmse": 8.240353837453875e-06,
+      "normalized_data_loss": 0.0478979308493794,
+      "normalized_physics_loss": 0.004070681489275302,
+      "weighted_physics_loss": 0.00040706814892753026,
+      "normalized_total_loss": 0.04830499899830693
+    },
+    {
+      "physics_weight": 1.0,
+      "best_epoch": 21,
+      "epochs_completed": 25,
+      "stopped_early": false,
+      "records": 30457,
+      "soh_rmse": 0.010354120270136024,
+      "soh_r2": 0.94998127397749,
+      "physical_residual_mae": 3.845999893068459e-06,
+      "physical_residual_rmse": 5.349047277868651e-06,
+      "normalized_data_loss": 0.050163399695681475,
+      "normalized_physics_loss": 0.0017152533414036269,
+      "weighted_physics_loss": 0.0017152533414036269,
+      "normalized_total_loss": 0.0518786530370851
+    }
+  ]
+}
