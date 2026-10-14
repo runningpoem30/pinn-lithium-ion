@@ -38,12 +38,16 @@ COLORS = ("#0072B2", "#D55E00", "#009E73")
 
 
 @dataclass(frozen=True)
-class AlignedPredictions:
+class AlignedSoHPredictions:
     seeds: tuple[int, ...]
     battery_id: np.ndarray
     cycle: np.ndarray
     target_soh: np.ndarray
     predicted_soh: np.ndarray
+
+
+@dataclass(frozen=True)
+class AlignedPredictions(AlignedSoHPredictions):
     time_derivative: np.ndarray
     dynamics: np.ndarray
     physics_residual: np.ndarray
@@ -118,7 +122,9 @@ def load_aligned_predictions(input_dir: Path) -> AlignedPredictions:
     )
 
 
-def calculate_analysis(aligned: AlignedPredictions) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+def calculate_analysis(
+    aligned: AlignedSoHPredictions,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     ensemble = aligned.predicted_soh.mean(axis=0)
     ensemble_metrics = regression_metrics(aligned.target_soh, ensemble)
     seed_metrics = []
@@ -213,7 +219,11 @@ def _representative_batteries(per_battery: list[dict[str, Any]]) -> list[int]:
     return [int(ordered[index]["battery_id"]) for index in indices]
 
 
-def _plot_parity(aligned: AlignedPredictions, summary: dict[str, Any]) -> plt.Figure:
+def _plot_parity(
+    aligned: AlignedSoHPredictions,
+    summary: dict[str, Any],
+    model_label: str = "DeepHPM",
+) -> plt.Figure:
     predicted = aligned.predicted_soh.mean(axis=0)
     index = _sample_indices(predicted.size)
     lower = min(aligned.target_soh.min(), predicted.min())
@@ -231,14 +241,20 @@ def _plot_parity(aligned: AlignedPredictions, summary: dict[str, Any]) -> plt.Fi
         transform=axis.transAxes, va="top",
         bbox={"facecolor": "white", "alpha": 0.9, "edgecolor": "#BBBBBB"},
     )
-    axis.set(xlabel="Measured SoH", ylabel="Predicted SoH", title="DeepHPM SoH: measured vs predicted")
+    axis.set(
+        xlabel="Measured SoH",
+        ylabel="Predicted SoH",
+        title=f"{model_label} SoH: measured vs predicted",
+    )
     axis.set_aspect("equal", adjustable="box")
     axis.legend(loc="lower right")
     return fig
 
 
 def _plot_trajectories(
-    aligned: AlignedPredictions, representatives: list[int]
+    aligned: AlignedSoHPredictions,
+    representatives: list[int],
+    model_label: str = "DeepHPM",
 ) -> plt.Figure:
     fig, axes = plt.subplots(1, len(representatives), figsize=(15, 4.8), sharey=True)
     for axis, battery_id, difficulty in zip(
@@ -256,25 +272,35 @@ def _plot_trajectories(
         axis.set_xlabel("Cycle")
     axes[0].set_ylabel("SoH")
     axes[-1].legend(loc="best")
-    fig.suptitle("Representative held-out battery degradation trajectories")
+    fig.suptitle(
+        f"{model_label}: representative held-out battery degradation trajectories"
+    )
     fig.tight_layout()
     return fig
 
 
-def _plot_per_battery(per_battery: list[dict[str, Any]]) -> plt.Figure:
+def _plot_per_battery(
+    per_battery: list[dict[str, Any]], model_label: str = "DeepHPM"
+) -> plt.Figure:
     rows = sorted(per_battery, key=lambda row: row["battery_id"])
     batteries = [row["battery_id"] for row in rows]
     fig, axis = plt.subplots(figsize=(12, 5.5))
     axis.plot(batteries, [row["rmse"] for row in rows], "o-", color=COLORS[1], label="RMSE")
     axis.plot(batteries, [row["mae"] for row in rows], "s-", color=COLORS[0], label="MAE")
     axis.axhline(np.mean([row["rmse"] for row in rows]), color=COLORS[1], linestyle="--", alpha=0.7)
-    axis.set(xlabel="Test battery ID", ylabel="SoH error", title="Per-battery DeepHPM error")
+    axis.set(
+        xlabel="Test battery ID",
+        ylabel="SoH error",
+        title=f"Per-battery {model_label} error",
+    )
     axis.set_xticks(batteries[::2])
     axis.legend()
     return fig
 
 
-def _plot_error_distributions(aligned: AlignedPredictions) -> plt.Figure:
+def _plot_error_distributions(
+    aligned: AlignedSoHPredictions, model_label: str = "DeepHPM"
+) -> plt.Figure:
     error = aligned.predicted_soh.mean(axis=0) - aligned.target_soh
     absolute = np.abs(error)
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.8))
@@ -287,7 +313,7 @@ def _plot_error_distributions(aligned: AlignedPredictions) -> plt.Figure:
     axes[1].axvline(np.percentile(absolute, 95), color=COLORS[1], linestyle="--", label="95th percentile")
     axes[1].set(xlabel="Absolute SoH error", ylabel="Cumulative fraction", title="Absolute-error distribution")
     axes[1].legend()
-    fig.suptitle("DeepHPM test error distribution")
+    fig.suptitle(f"{model_label} test error distribution")
     fig.tight_layout()
     return fig
 
@@ -362,7 +388,9 @@ def _plot_dynamics(aligned: AlignedPredictions) -> plt.Figure:
     return fig
 
 
-def _plot_seed_stability(summary: dict[str, Any]) -> plt.Figure:
+def _plot_seed_stability(
+    summary: dict[str, Any], model_label: str = "DeepHPM"
+) -> plt.Figure:
     rows = summary["per_seed_metrics"]
     labels = [str(row["seed"]) for row in rows]
     x = np.arange(len(rows))
@@ -375,7 +403,7 @@ def _plot_seed_stability(summary: dict[str, Any]) -> plt.Figure:
     axes[1].bar(x, [row["r2"] for row in rows], width=0.55, color=COLORS[2])
     axes[1].set(xticks=x, xticklabels=labels, xlabel="Seed", ylabel=r"$R^2$", title=r"$R^2$ by seed")
     axes[1].set_ylim(0, 1)
-    fig.suptitle("DeepHPM stability across fixed random seeds")
+    fig.suptitle(f"{model_label} stability across fixed random seeds")
     fig.tight_layout()
     return fig
 

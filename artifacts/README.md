@@ -47,3 +47,10 @@ but optimizes normalized PCL data loss only. Seed directories contain the
 checkpoint, frozen scalers, resolved configuration, history, training summary,
 test metrics, and protocol-aligned cycle-level predictions. Root reports contain
 per-seed results and mean/sample-standard-deviation aggregates.
+
+`data_driven/analysis/` contains the read-only analysis of the frozen Step 9
+predictions. It includes aligned three-seed ensemble predictions, aggregate and
+per-battery metrics, and six presentation figures in 300-DPI PNG, SVG, and PDF
+formats. Generate it with `python -m src.analyze_baseline`; the command reads
+saved predictions and histories only, and neither loads a checkpoint nor
+retrains the baseline.

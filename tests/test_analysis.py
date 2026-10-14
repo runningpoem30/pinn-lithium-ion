@@ -4,6 +4,11 @@ from pathlib import Path
 
 import numpy as np
 
+from src.analyze_baseline import (
+    BASELINE_FIGURE_NAMES,
+    generate_baseline_analysis,
+    load_aligned_baseline_predictions,
+)
 from src.analyze_final import (
     FIGURE_NAMES,
     FORMATS,
@@ -25,6 +30,8 @@ FIELDNAMES = (
     "dynamics",
     "physics_residual",
 )
+
+BASELINE_FIELDNAMES = FIELDNAMES[:7]
 
 
 def _prediction_rows(seed_offset: float) -> list[dict[str, float | int]]:
@@ -84,6 +91,42 @@ def _write_seed(root: Path, seed: int, rows: list[dict[str, float | int]]) -> No
     (directory / "training_summary.json").write_text(json.dumps({"best_epoch": 3}))
 
 
+def _write_baseline_seed(
+    root: Path, seed: int, rows: list[dict[str, float | int]]
+) -> None:
+    directory = root / f"seed_{seed}"
+    directory.mkdir(parents=True)
+    with (directory / "test_predictions.csv").open("w", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=BASELINE_FIELDNAMES)
+        writer.writeheader()
+        writer.writerows(
+            {name: row[name] for name in BASELINE_FIELDNAMES} for row in rows
+        )
+    with (directory / "history.csv").open("w", newline="") as stream:
+        names = (
+            "epoch", "train_total", "train_data", "train_physics",
+            "validation_total", "validation_data", "validation_physics",
+            "gradient_norm", "improved",
+        )
+        writer = csv.DictWriter(stream, fieldnames=names)
+        writer.writeheader()
+        for epoch in range(1, 4):
+            writer.writerow(
+                {
+                    "epoch": epoch,
+                    "train_total": 1 / epoch,
+                    "train_data": 1 / epoch,
+                    "train_physics": 0.0,
+                    "validation_total": 1.1 / epoch,
+                    "validation_data": 1.1 / epoch,
+                    "validation_physics": 0.0,
+                    "gradient_norm": 1 / epoch,
+                    "improved": True,
+                }
+            )
+    (directory / "training_summary.json").write_text(json.dumps({"best_epoch": 3}))
+
+
 def test_alignment_uses_battery_and_cycle_not_csv_row_order(tmp_path: Path):
     first = _prediction_rows(0.0)
     second = list(reversed(_prediction_rows(0.01)))
@@ -130,6 +173,43 @@ def test_generation_creates_all_tables_reports_and_figure_formats(tmp_path: Path
     ):
         assert (output_dir / name).is_file()
     for figure in FIGURE_NAMES:
+        for extension in FORMATS:
+            path = output_dir / "figures" / f"{figure}.{extension}"
+            assert path.is_file()
+            assert path.stat().st_size > 0
+
+
+def test_baseline_alignment_uses_battery_and_cycle_not_csv_order(tmp_path: Path):
+    _write_baseline_seed(tmp_path, 11, _prediction_rows(0.0))
+    _write_baseline_seed(tmp_path, 22, list(reversed(_prediction_rows(0.01))))
+
+    aligned = load_aligned_baseline_predictions(tmp_path)
+
+    assert aligned.seeds == (11, 22)
+    assert np.all(np.diff(aligned.battery_id) >= 0)
+    assert np.allclose(aligned.predicted_soh[1] - aligned.predicted_soh[0], 0.01)
+
+
+def test_baseline_generation_creates_expected_outputs(tmp_path: Path):
+    input_dir = tmp_path / "final"
+    output_dir = tmp_path / "analysis"
+    for seed, offset in ((11, -0.002), (22, 0.0), (33, 0.002)):
+        _write_baseline_seed(input_dir, seed, _prediction_rows(offset))
+
+    summary = generate_baseline_analysis(input_dir, output_dir)
+
+    assert summary["model_type"] == "data_driven"
+    assert summary["physics_diagnostics"].startswith("not applicable")
+    assert summary["records"] == 12
+    for name in (
+        "analysis_summary.json",
+        "analysis_summary.md",
+        "per_battery_metrics.csv",
+        "per_seed_metrics.csv",
+        "aligned_ensemble_predictions.csv",
+    ):
+        assert (output_dir / name).is_file()
+    for figure in BASELINE_FIGURE_NAMES:
         for extension in FORMATS:
             path = output_dir / "figures" / f"{figure}.{extension}"
             assert path.is_file()
