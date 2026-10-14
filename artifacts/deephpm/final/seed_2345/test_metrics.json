@@ -1,0 +1,9 @@
+{
+  "records": 41240,
+  "batteries": 40,
+  "soh_mae": 0.01439569574554029,
+  "soh_rmse": 0.01663616899233349,
+  "soh_r2": 0.8254752886707369,
+  "physical_residual_mae": 8.942636302255432e-06,
+  "physical_residual_rmse": 1.0406548019542594e-05
+}

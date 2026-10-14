@@ -1,0 +1,76 @@
+{
+  "experiment": "DeepHPM SoH final multi-seed evaluation",
+  "physics_weight": 0.001,
+  "model_selection_data": "validation split only",
+  "test_evaluation_timing": "once per seed after best checkpoint restoration",
+  "per_seed": [
+    {
+      "seed": 1234,
+      "best_epoch": 21,
+      "epochs_completed": 31,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "soh_mae": 0.01421044759387304,
+      "soh_rmse": 0.01658747948170508,
+      "soh_r2": 0.8264953658086972,
+      "physical_residual_mae": 1.1458660125840425e-05,
+      "physical_residual_rmse": 1.4039650470343278e-05
+    },
+    {
+      "seed": 2345,
+      "best_epoch": 30,
+      "epochs_completed": 40,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "soh_mae": 0.01439569574554029,
+      "soh_rmse": 0.01663616899233349,
+      "soh_r2": 0.8254752886707369,
+      "physical_residual_mae": 8.942636302255432e-06,
+      "physical_residual_rmse": 1.0406548019542594e-05
+    },
+    {
+      "seed": 3456,
+      "best_epoch": 29,
+      "epochs_completed": 39,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "soh_mae": 0.011360346500614566,
+      "soh_rmse": 0.013771095962316668,
+      "soh_r2": 0.8804120858671804,
+      "physical_residual_mae": 8.625945505426833e-06,
+      "physical_residual_rmse": 1.081321256801976e-05
+    }
+  ],
+  "aggregate": {
+    "num_seeds": 3,
+    "seeds": [
+      1234,
+      2345,
+      3456
+    ],
+    "standard_deviation": "sample (ddof=1) when more than one seed",
+    "soh_mae": {
+      "mean": 0.013322163280009298,
+      "std": 0.0017015061052961503
+    },
+    "soh_rmse": {
+      "mean": 0.015664914812118413,
+      "std": 0.0016402759048433318
+    },
+    "soh_r2": {
+      "mean": 0.8441275801155381,
+      "std": 0.03142744274630958
+    },
+    "physical_residual_mae": {
+      "mean": 9.675747311174231e-06,
+      "std": 1.5521458835189058e-06
+    },
+    "physical_residual_rmse": {
+      "mean": 1.1753137019301877e-05,
+      "std": 1.9905908256324237e-06
+    }
+  }
+}

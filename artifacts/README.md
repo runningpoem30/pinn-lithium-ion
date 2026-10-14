@@ -19,3 +19,11 @@ It is a software verification run, not an experimental result.
 sweep, including one reproducible run directory per physics weight and compact
 JSON, CSV, and Markdown comparison reports. These are hyperparameter-selection
 results, not final test results.
+
+`deephpm/final/` contains the Step 6 final DeepHPM SoH experiment at the frozen
+physics weight of `0.001`. Each seed directory contains the validation-selected
+checkpoint, training-only scalers, resolved configuration, loss history,
+training summary, held-out test metrics, and cycle-level predictions with
+physics residuals and battery IDs. The root JSON, CSV, and Markdown reports
+summarize all three seeds using the mean and sample standard deviation; no seed
+is selected using test performance.
