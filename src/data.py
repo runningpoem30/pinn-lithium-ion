@@ -30,6 +30,7 @@ from src.data_audit import (
     audit_arrays,
     reconstruct_battery_boundaries,
 )
+from src.rul_audit import reconstruct_rul_labels
 
 
 @dataclass(frozen=True)
@@ -78,20 +79,29 @@ class DatasetScalers:
     features: StandardizationStats
     cycle: StandardizationStats
     target_pcl: StandardizationStats
+    target_rul: StandardizationStats | None = None
 
     def save(self, path: Path) -> None:
         """Save scaler arrays without pickling Python objects."""
 
         path.parent.mkdir(parents=True, exist_ok=True)
+        values: dict[str, np.ndarray] = {
+            "feature_mean": self.features.mean,
+            "feature_scale": self.features.scale,
+            "cycle_mean": self.cycle.mean,
+            "cycle_scale": self.cycle.scale,
+            "target_pcl_mean": self.target_pcl.mean,
+            "target_pcl_scale": self.target_pcl.scale,
+            "feature_names": np.asarray(FEATURE_NAMES),
+        }
+        if self.target_rul is not None:
+            values.update(
+                target_rul_mean=self.target_rul.mean,
+                target_rul_scale=self.target_rul.scale,
+            )
         np.savez(
             path,
-            feature_mean=self.features.mean,
-            feature_scale=self.features.scale,
-            cycle_mean=self.cycle.mean,
-            cycle_scale=self.cycle.scale,
-            target_pcl_mean=self.target_pcl.mean,
-            target_pcl_scale=self.target_pcl.scale,
-            feature_names=np.asarray(FEATURE_NAMES),
+            **values,
         )
 
     @classmethod
@@ -112,6 +122,13 @@ class DatasetScalers:
                 target_pcl=StandardizationStats(
                     values["target_pcl_mean"], values["target_pcl_scale"]
                 ),
+                target_rul=(
+                    StandardizationStats(
+                        values["target_rul_mean"], values["target_rul_scale"]
+                    )
+                    if "target_rul_mean" in values.files
+                    else None
+                ),
             )
 
 
@@ -128,6 +145,9 @@ class BatteryDataset(Dataset[dict[str, torch.Tensor]]):
         target_pcl: np.ndarray,
         target_pcl_normalized: np.ndarray,
         battery_id: np.ndarray,
+        target_rul: np.ndarray | None = None,
+        target_rul_normalized: np.ndarray | None = None,
+        eol_cycle: np.ndarray | None = None,
     ) -> None:
         sample_count = features_raw.shape[0]
         arrays = {
@@ -139,6 +159,16 @@ class BatteryDataset(Dataset[dict[str, torch.Tensor]]):
             "target_pcl_normalized": target_pcl_normalized,
             "battery_id": battery_id,
         }
+        optional = {
+            "target_rul": target_rul,
+            "target_rul_normalized": target_rul_normalized,
+            "eol_cycle": eol_cycle,
+        }
+        if any(value is not None for value in optional.values()) and not all(
+            value is not None for value in optional.values()
+        ):
+            raise ValueError("RUL tensors must be provided together")
+        arrays.update({name: value for name, value in optional.items() if value is not None})
         for name, values in arrays.items():
             if values.shape[0] != sample_count:
                 raise ValueError(
@@ -156,6 +186,12 @@ class BatteryDataset(Dataset[dict[str, torch.Tensor]]):
                 np.ascontiguousarray(battery_id), dtype=torch.int64
             ),
         }
+        if target_rul is not None:
+            self.tensors.update(
+                target_rul=_float_tensor(target_rul),
+                target_rul_normalized=_float_tensor(target_rul_normalized),
+                eol_cycle=_float_tensor(eol_cycle),
+            )
 
     def __len__(self) -> int:
         return self.tensors["battery_id"].shape[0]
@@ -235,7 +271,14 @@ def build_data_pipeline_from_arrays(
     target_pcl = _as_float_matrix(
         np.asarray(arrays["PCL_Flt"]).reshape(-1), "PCL_Flt"
     )
-    battery_ids = _record_battery_ids(arrays["Num_Cycles_Flt"])
+    reconstructed_rul = reconstruct_rul_labels(
+        cycles=arrays["Cycles_Flt"],
+        stored_rul=arrays["RUL_Flt"],
+        num_cycles=arrays["Num_Cycles_Flt"],
+    )
+    target_rul = _as_float_matrix(reconstructed_rul.target_rul, "target_rul")
+    eol_cycle = _as_float_matrix(reconstructed_rul.eol_cycle, "eol_cycle")
+    battery_ids = reconstructed_rul.battery_id[:, None]
 
     split_indices = {
         split_name: np.flatnonzero(
@@ -250,12 +293,17 @@ def build_data_pipeline_from_arrays(
         target_pcl=StandardizationStats.fit(
             target_pcl[train_indices], "target_pcl"
         ),
+        target_rul=StandardizationStats.fit(
+            target_rul[train_indices], "target_rul"
+        ),
     )
 
     def make_dataset(indices: np.ndarray) -> BatteryDataset:
         features_split = features[indices]
         cycle_split = cycle[indices]
         target_split = target_pcl[indices]
+        rul_split = target_rul[indices]
+        assert scalers.target_rul is not None
         return BatteryDataset(
             features_raw=features_split,
             features_normalized=scalers.features.transform(
@@ -268,6 +316,11 @@ def build_data_pipeline_from_arrays(
                 target_split, "target_pcl"
             ),
             battery_id=battery_ids[indices],
+            target_rul=rul_split,
+            target_rul_normalized=scalers.target_rul.transform(
+                rul_split, "target_rul"
+            ),
+            eol_cycle=eol_cycle[indices],
         )
 
     bundle = BatteryDataBundle(
@@ -328,6 +381,16 @@ def pipeline_summary(bundle: BatteryDataBundle) -> dict[str, Any]:
         "cycle_scale": bundle.scalers.cycle.scale.tolist(),
         "target_pcl_mean": bundle.scalers.target_pcl.mean.tolist(),
         "target_pcl_scale": bundle.scalers.target_pcl.scale.tolist(),
+        "target_rul_mean": (
+            bundle.scalers.target_rul.mean.tolist()
+            if bundle.scalers.target_rul is not None
+            else None
+        ),
+        "target_rul_scale": (
+            bundle.scalers.target_rul.scale.tolist()
+            if bundle.scalers.target_rul is not None
+            else None
+        ),
     }
 
 

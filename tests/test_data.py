@@ -62,6 +62,10 @@ def test_scalers_are_fitted_only_on_training_records():
     assert np.allclose(train_normalized.mean(axis=0), 0.0, atol=1e-6)
     assert np.allclose(train_normalized.std(axis=0), 1.0, atol=1e-6)
     assert not np.allclose(validation_normalized.mean(axis=0), 0.0, atol=1e-3)
+    expected_train_rul = arrays["RUL_Flt"][:3]
+    assert bundle.scalers.target_rul is not None
+    assert np.allclose(bundle.scalers.target_rul.mean, expected_train_rul.mean(axis=0))
+    assert np.allclose(bundle.scalers.target_rul.scale, expected_train_rul.std(axis=0))
 
 
 def test_raw_cycle_is_preserved_and_can_become_an_autograd_leaf():
@@ -85,6 +89,40 @@ def test_scalers_round_trip_without_pickle(tmp_path: Path):
     assert np.array_equal(restored.features.scale, bundle.scalers.features.scale)
     assert np.array_equal(restored.cycle.mean, bundle.scalers.cycle.mean)
     assert np.array_equal(restored.target_pcl.scale, bundle.scalers.target_pcl.scale)
+    assert restored.target_rul is not None
+    assert bundle.scalers.target_rul is not None
+    assert np.array_equal(restored.target_rul.mean, bundle.scalers.target_rul.mean)
+    assert np.array_equal(restored.target_rul.scale, bundle.scalers.target_rul.scale)
+
+
+def test_rul_targets_match_audited_formula_and_preserve_identity():
+    bundle = build_data_pipeline_from_arrays(pipeline_arrays())
+    for dataset in (bundle.train, bundle.validation, bundle.test):
+        tensors = dataset.tensors
+        assert torch.equal(
+            tensors["target_rul"], tensors["eol_cycle"] - tensors["cycle_raw"]
+        )
+        assert torch.all(tensors["target_rul"] >= 0)
+        assert tensors["battery_id"].dtype == torch.int64
+    assert torch.equal(
+        bundle.train.tensors["target_rul"].reshape(-1),
+        torch.tensor([2.0, 1.0, 0.0]),
+    )
+
+
+def test_validation_and_test_rul_cannot_influence_training_scaler():
+    original = pipeline_arrays()
+    shifted = {name: values.copy() for name, values in original.items()}
+    # Whole-battery shifts preserve the audited cycle + RUL endpoint invariant.
+    shifted["RUL_Flt"][3:, 0] += 10_000
+    first = build_data_pipeline_from_arrays(original)
+    second = build_data_pipeline_from_arrays(shifted)
+    assert first.scalers.target_rul is not None
+    assert second.scalers.target_rul is not None
+    assert np.array_equal(first.scalers.target_rul.mean, second.scalers.target_rul.mean)
+    assert np.array_equal(first.scalers.target_rul.scale, second.scalers.target_rul.scale)
+    first.assert_no_battery_leakage()
+    second.assert_no_battery_leakage()
 
 
 def test_data_loaders_return_named_batched_tensors():
@@ -98,6 +136,9 @@ def test_data_loaders_return_named_batched_tensors():
         "cycle_normalized",
         "target_pcl",
         "target_pcl_normalized",
+        "target_rul",
+        "target_rul_normalized",
+        "eol_cycle",
         "battery_id",
     }
     assert batch["features_normalized"].shape == (2, 8)

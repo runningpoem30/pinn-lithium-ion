@@ -1,0 +1,20 @@
+{
+  "records": 41240,
+  "batteries": 40,
+  "mae": 231.49990837289567,
+  "rmse": 323.12375320352714,
+  "r2": 0.2867825603100047,
+  "bias": -198.71022134516335,
+  "signed_error_p05": -703.0783996582031,
+  "signed_error_p50": -153.41529846191406,
+  "signed_error_p95": 100.60212631225583,
+  "absolute_error_p50": 155.3955078125,
+  "absolute_error_p90": 526.8752532958983,
+  "absolute_error_p95": 703.0783996582029,
+  "absolute_error_p99": 1013.3132769775392,
+  "battery_macro_mae": 200.5168576599543,
+  "battery_macro_rmse": 244.13295092353374,
+  "battery_macro_bias": -166.2761444679741,
+  "negative_prediction_count": 507,
+  "negative_prediction_fraction": 0.012293889427740057
+}

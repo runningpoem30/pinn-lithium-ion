@@ -1,0 +1,152 @@
+{
+  "experiment": "DataDrivenNN RUL final multi-seed evaluation",
+  "model_type": "data_driven",
+  "task": "rul",
+  "units": "cycles",
+  "loss": "training-normalized RUL mean squared error only",
+  "checkpoint_selection": "battery-macro validation RMSE only",
+  "test_evaluation_timing": "once per seed after best checkpoint restoration",
+  "per_seed": [
+    {
+      "seed": 1234,
+      "best_epoch": 52,
+      "epochs_completed": 60,
+      "stopped_early": false,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 219.93283661769271,
+      "rmse": 315.8610383100816,
+      "r2": 0.31848361432054983,
+      "bias": -187.57785659738238,
+      "signed_error_p05": -699.9191253662109,
+      "signed_error_p50": -138.1132049560547,
+      "signed_error_p95": 90.87637329101558,
+      "absolute_error_p50": 144.76319885253906,
+      "absolute_error_p90": 510.66318969726547,
+      "absolute_error_p95": 699.9191253662106,
+      "absolute_error_p99": 1006.3432238769536,
+      "battery_macro_mae": 194.30353062561525,
+      "battery_macro_rmse": 242.49204808033127,
+      "battery_macro_bias": -160.79793681824972,
+      "negative_prediction_count": 376,
+      "negative_prediction_fraction": 0.009117361784675072
+    },
+    {
+      "seed": 2345,
+      "best_epoch": 39,
+      "epochs_completed": 49,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 231.49990837289567,
+      "rmse": 323.12375320352714,
+      "r2": 0.2867825603100047,
+      "bias": -198.71022134516335,
+      "signed_error_p05": -703.0783996582031,
+      "signed_error_p50": -153.41529846191406,
+      "signed_error_p95": 100.60212631225583,
+      "absolute_error_p50": 155.3955078125,
+      "absolute_error_p90": 526.8752532958983,
+      "absolute_error_p95": 703.0783996582029,
+      "absolute_error_p99": 1013.3132769775392,
+      "battery_macro_mae": 200.5168576599543,
+      "battery_macro_rmse": 244.13295092353374,
+      "battery_macro_bias": -166.2761444679741,
+      "negative_prediction_count": 507,
+      "negative_prediction_fraction": 0.012293889427740057
+    },
+    {
+      "seed": 3456,
+      "best_epoch": 45,
+      "epochs_completed": 55,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 240.2781091162814,
+      "rmse": 340.92773255965557,
+      "r2": 0.20602131267947543,
+      "bias": -229.0885110276053,
+      "signed_error_p05": -724.0958221435546,
+      "signed_error_p50": -160.01930236816406,
+      "signed_error_p95": 42.99693832397452,
+      "absolute_error_p50": 160.69454956054688,
+      "absolute_error_p90": 571.9244018554687,
+      "absolute_error_p95": 724.0958221435541,
+      "absolute_error_p99": 1074.7834646606448,
+      "battery_macro_mae": 206.67810146848456,
+      "battery_macro_rmse": 254.3367950357569,
+      "battery_macro_bias": -193.9803596120309,
+      "negative_prediction_count": 168,
+      "negative_prediction_fraction": 0.004073714839961203
+    }
+  ],
+  "aggregate": {
+    "num_seeds": 3,
+    "seeds": [
+      1234,
+      2345,
+      3456
+    ],
+    "standard_deviation": "sample (ddof=1)",
+    "mae": {
+      "mean": 230.5702847022899,
+      "std": 10.204444050861866
+    },
+    "rmse": {
+      "mean": 326.6375080244215,
+      "std": 12.897466606137215
+    },
+    "r2": {
+      "mean": 0.27042916243667664,
+      "std": 0.05798721875641674
+    },
+    "bias": {
+      "mean": -205.12552965671702,
+      "std": 21.486059279345845
+    },
+    "signed_error_p05": {
+      "mean": -709.0311157226562,
+      "std": 13.14170035322311
+    },
+    "signed_error_p50": {
+      "mean": -150.51593526204428,
+      "std": 11.23717073736871
+    },
+    "signed_error_p95": {
+      "mean": 78.15847930908198,
+      "std": 30.836634727108027
+    },
+    "absolute_error_p50": {
+      "mean": 153.6177520751953,
+      "std": 8.113094073257443
+    },
+    "absolute_error_p90": {
+      "mean": 536.4876149495441,
+      "std": 31.74164695149664
+    },
+    "absolute_error_p95": {
+      "mean": 709.0311157226557,
+      "std": 13.141700353222951
+    },
+    "absolute_error_p99": {
+      "mean": 1031.4799885050459,
+      "std": 37.66349287340644
+    },
+    "battery_macro_mae": {
+      "mean": 200.49949658468472,
+      "std": 6.187303689128138
+    },
+    "battery_macro_rmse": {
+      "mean": 246.987264679874,
+      "std": 6.417541419752655
+    },
+    "battery_macro_bias": {
+      "mean": -173.68481363275157,
+      "std": 17.788608144291544
+    },
+    "negative_prediction_fraction": {
+      "mean": 0.008494988684125444,
+      "std": 0.004145277888225002
+    }
+  }
+}

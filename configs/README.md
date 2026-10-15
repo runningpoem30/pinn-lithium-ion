@@ -18,6 +18,11 @@ batching, early stopping, complete splits, and fixed seeds as the final DeepHPM
 experiment, but sets the physics weight to zero and instantiates no dynamics
 network.
 
+`data_driven_rul_final.yaml` defines the Step 14 three-seed DataDrivenNN RUL
+baseline. It trains on the audited cycle-level RUL target, fits every scaler on
+training batteries only, and selects checkpoints using battery-macro validation
+RMSE in physical cycles before evaluating the final test batteries once.
+
 `verhulst_soh_tuning.yaml` defines the Step 11 validation-only VerhulstPINN
 physics-weight sweep. It uses the same candidates and selection rule as the
 DeepHPM sweep. The final Verhulst configuration is frozen only after this sweep

@@ -1,0 +1,9 @@
+{
+  "best_epoch": 52,
+  "best_validation_battery_macro_rmse_cycles": 104.42280529290414,
+  "epochs_completed": 60,
+  "stopped_early": false,
+  "device": "cpu",
+  "early_stopping_monitor": "battery-macro validation RMSE in cycles",
+  "physics_loss_used": false
+}

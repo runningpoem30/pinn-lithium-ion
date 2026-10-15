@@ -88,3 +88,13 @@ protocol. It reconstructs all cycle-level labels battery-wise, records the
 legacy capacity-threshold definition and endpoint-row behavior, preserves the
 official splits, and exports an immutable test reference. Generate it with
 `python -m src.rul_audit`; no neural network is imported or trained.
+
+`rul/data_scalers.npz` and `rul/data_pipeline_summary.json` are the Step 14
+pipeline artifacts. The scaler file includes the RUL mean and scale fitted only
+from the official training batteries; it is separate from the frozen SoH
+scaler so completed SoH artifacts retain their original fingerprint.
+
+`data_driven/rul/final/` contains the Step 14 three-seed DataDrivenNN RUL
+baseline. Each seed stores its validation-selected checkpoint, training-only
+scalers, resolved configuration, training history, test predictions, test
+metrics, and per-battery metrics. Root reports summarize results across seeds.
