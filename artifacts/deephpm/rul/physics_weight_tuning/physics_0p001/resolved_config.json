@@ -1,0 +1,41 @@
+{
+  "data": {
+    "dataset_path": "SeversonBattery.mat",
+    "batch_size": 2048,
+    "num_workers": 0
+  },
+  "model": {
+    "surrogate_hidden_dims": [
+      64,
+      64
+    ],
+    "dynamics_hidden_dims": [
+      32,
+      32
+    ]
+  },
+  "training": {
+    "seed": 1234,
+    "epochs": 25,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "physics_weight": 0.001,
+    "gradient_clip_norm": 5.0,
+    "early_stopping_patience": 6,
+    "early_stopping_min_delta": 0.1,
+    "early_stopping_monitor": "data",
+    "device": "cpu",
+    "max_train_batches": null,
+    "max_validation_batches": null
+  },
+  "output_dir": "artifacts/deephpm/rul/physics_weight_tuning/physics_0p001",
+  "model_type": "deephpm",
+  "task": "rul",
+  "target": "RUL_Flt = cycle_life - cycle",
+  "surrogate": "R(features, raw cycle) in physical cycles",
+  "learned_dynamics": "G(normalized cycle, normalized RUL) converted to cycles per cycle",
+  "derivative": "partial dR/d(raw cycle), holding row features fixed",
+  "residual": "dR/dcycle - G, in cycles per cycle",
+  "audited_ideal_trajectory_derivative": -1.0,
+  "checkpoint_selection": "validation battery-macro RUL RMSE in cycles"
+}

@@ -1,0 +1,8 @@
+{
+  "best_epoch": 25,
+  "epochs_completed": 25,
+  "stopped_early": false,
+  "best_validation_battery_macro_rmse_cycles": 113.77628105715185,
+  "checkpoint_selection": "validation battery-macro RUL RMSE only",
+  "test_set_used_during_training": false
+}

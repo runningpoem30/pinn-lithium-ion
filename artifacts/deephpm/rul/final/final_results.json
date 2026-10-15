@@ -1,0 +1,179 @@
+{
+  "experiment": "Final DeepHPM direct-RUL multi-seed evaluation",
+  "target": "RUL_Flt = cycle_life - cycle, in cycles",
+  "learned_dynamics_units": "cycles per cycle",
+  "residual": "dRUL/d(raw cycle) - G(cycle,RUL), cycles per cycle",
+  "physics_weight": 1.0,
+  "model_selection_data": "validation only",
+  "test_evaluation_timing": "once per seed after checkpoint restoration",
+  "per_seed": [
+    {
+      "seed": 1234,
+      "best_epoch": 56,
+      "epochs_completed": 60,
+      "stopped_early": false,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 220.34949074531502,
+      "rmse": 309.9880618489697,
+      "r2": 0.3435916118375053,
+      "bias": -211.47195777523066,
+      "signed_error_p05": -704.6618041992188,
+      "signed_error_p50": -156.08221435546875,
+      "signed_error_p95": 29.733611297607258,
+      "absolute_error_p50": 156.9825897216797,
+      "absolute_error_p90": 508.36220397949154,
+      "absolute_error_p95": 704.6618041992188,
+      "absolute_error_p99": 988.0077563476563,
+      "battery_macro_mae": 192.45762064664368,
+      "battery_macro_rmse": 230.6947743177593,
+      "battery_macro_bias": -182.70972595335556,
+      "negative_prediction_count": 550,
+      "negative_prediction_fraction": 0.013336566440349175,
+      "physical_residual_mae": 0.10236808108995221,
+      "physical_residual_rmse": 0.11603652604784062,
+      "derivative_mean": -0.026499638081061948,
+      "learned_dynamics_mean": -0.12595847307130328,
+      "derivative_minus_one_mae": 0.9735003619189381,
+      "dynamics_minus_one_mae": 0.8740415269286967
+    },
+    {
+      "seed": 2345,
+      "best_epoch": 47,
+      "epochs_completed": 57,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 232.6106574775407,
+      "rmse": 321.8594903429636,
+      "r2": 0.29235275014976414,
+      "bias": -226.6801929455377,
+      "signed_error_p05": -724.7142913818359,
+      "signed_error_p50": -170.88534545898438,
+      "signed_error_p95": 27.214385986327994,
+      "absolute_error_p50": 170.90402221679688,
+      "absolute_error_p90": 530.0129425048822,
+      "absolute_error_p95": 724.7142913818352,
+      "absolute_error_p99": 1024.845812072754,
+      "battery_macro_mae": 198.77704395410518,
+      "battery_macro_rmse": 233.66195219171814,
+      "battery_macro_bias": -192.14063073807952,
+      "negative_prediction_count": 69,
+      "negative_prediction_fraction": 0.0016731328806983512,
+      "physical_residual_mae": 0.042074225070027255,
+      "physical_residual_rmse": 0.052092251098505356,
+      "derivative_mean": -0.09530751862107392,
+      "learned_dynamics_mean": -0.11475142446137915,
+      "derivative_minus_one_mae": 0.9046924813789261,
+      "dynamics_minus_one_mae": 0.8852485755386209
+    },
+    {
+      "seed": 3456,
+      "best_epoch": 56,
+      "epochs_completed": 60,
+      "stopped_early": false,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 269.47881644995437,
+      "rmse": 359.75530092046785,
+      "r2": 0.11590570423131297,
+      "bias": -268.30930812143794,
+      "signed_error_p05": -775.8944213867187,
+      "signed_error_p50": -209.53604125976562,
+      "signed_error_p95": -11.499737548828147,
+      "absolute_error_p50": 209.66285705566406,
+      "absolute_error_p90": 586.1668426513671,
+      "absolute_error_p95": 775.8944213867186,
+      "absolute_error_p99": 1086.3646835327152,
+      "battery_macro_mae": 232.3834096354486,
+      "battery_macro_rmse": 268.1635444549323,
+      "battery_macro_bias": -230.98329398615647,
+      "negative_prediction_count": 1620,
+      "negative_prediction_fraction": 0.039282250242483024,
+      "physical_residual_mae": 0.04228288740824732,
+      "physical_residual_rmse": 0.05563176254055439,
+      "derivative_mean": -0.12468509802631896,
+      "learned_dynamics_mean": -0.09960002769471285,
+      "derivative_minus_one_mae": 0.8753149019736809,
+      "dynamics_minus_one_mae": 0.9003999723052871
+    }
+  ],
+  "aggregate": {
+    "mae": {
+      "mean": 240.81298822427004,
+      "std": 25.5711034823918
+    },
+    "rmse": {
+      "mean": 330.5342843708004,
+      "std": 25.99295211723664
+    },
+    "r2": {
+      "mean": 0.25061668873952747,
+      "std": 0.1194430502253822
+    },
+    "bias": {
+      "mean": -235.4871529474021,
+      "std": 29.424360773858904
+    },
+    "signed_error_p05": {
+      "mean": -735.0901723225911,
+      "std": 36.732351092977616
+    },
+    "signed_error_p50": {
+      "mean": -178.83453369140625,
+      "std": 27.599277125397485
+    },
+    "signed_error_p95": {
+      "mean": 15.149419911702367,
+      "std": 23.113195777723153
+    },
+    "absolute_error_p50": {
+      "mean": 179.18315633138022,
+      "std": 27.298547358063917
+    },
+    "absolute_error_p90": {
+      "mean": 541.5139963785804,
+      "std": 40.15714294953712
+    },
+    "absolute_error_p95": {
+      "mean": 735.0901723225908,
+      "std": 36.73235109297765
+    },
+    "absolute_error_p99": {
+      "mean": 1033.0727506510418,
+      "std": 49.69188233605099
+    },
+    "battery_macro_mae": {
+      "mean": 207.87269141206582,
+      "std": 21.46078420291937
+    },
+    "battery_macro_rmse": {
+      "mean": 244.17342365480326,
+      "std": 20.828957202354527
+    },
+    "battery_macro_bias": {
+      "mean": -201.94455022586385,
+      "std": 25.586558397849885
+    },
+    "negative_prediction_fraction": {
+      "mean": 0.01809731652117685,
+      "std": 0.019251233289901165
+    },
+    "physical_residual_mae": {
+      "mean": 0.06224173118940893,
+      "std": 0.03475059499128713
+    },
+    "physical_residual_rmse": {
+      "mean": 0.07458684656230012,
+      "std": 0.035940074880314685
+    },
+    "derivative_minus_one_mae": {
+      "mean": 0.9178359150905151,
+      "std": 0.05039502478879859
+    },
+    "dynamics_minus_one_mae": {
+      "mean": 0.886563358257535,
+      "std": 0.013228318142006597
+    }
+  }
+}

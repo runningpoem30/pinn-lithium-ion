@@ -67,6 +67,25 @@ class RULDataDrivenOutput:
 
 
 @dataclass(frozen=True)
+class DeepHPMRULOutput:
+    """Direct-RUL surrogate and hidden-dynamics quantities.
+
+    ``rul`` is measured in cycles. ``time_derivative``, ``dynamics``, and
+    ``residual`` are measured in cycles per cycle (dimensionless). The
+    normalized variants use the training RUL and cycle scaler ratio.
+    """
+
+    rul: torch.Tensor
+    rul_normalized: torch.Tensor
+    cycle_raw: torch.Tensor
+    cycle_normalized: torch.Tensor
+    time_derivative: torch.Tensor
+    dynamics: torch.Tensor
+    residual: torch.Tensor
+    residual_normalized: torch.Tensor
+
+
+@dataclass(frozen=True)
 class ThresholdCrossingOutput:
     """Analytic time-to-EOL returned by the shifted Verhulst trajectory.
 
@@ -714,6 +733,115 @@ class DeepHPMNN(nn.Module):
             cycle_raw=cycle_for_grad,
             cycle_normalized=cycle_normalized,
             time_derivative=d_pcl_d_cycle,
+            dynamics=dynamics,
+            residual=residual,
+            residual_normalized=residual_normalized,
+        )
+
+
+class DeepHPMRULNN(nn.Module):
+    """Deep hidden-physics model for audited cycle-level RUL.
+
+    The surrogate learns ``R(features, cycle)`` in physical cycles. The
+    dynamics network learns ``G(cycle, R)`` in cycles per cycle and the hidden
+    physics residual is ``dR/dcycle - G``. For the audited label
+    ``R = cycle_life - cycle``, the ideal total trajectory derivative is -1;
+    this implementation deliberately learns rather than hard-codes that law
+    so it remains the DeepHPM learned-dynamics experiment.
+
+    Autograd computes the partial derivative with respect to the explicit raw
+    cycle input while the eight measured features in that row are held fixed.
+    """
+
+    def __init__(
+        self,
+        *,
+        feature_dim: int,
+        cycle_mean: float,
+        cycle_scale: float,
+        target_mean: float,
+        target_scale: float,
+        surrogate_hidden_dims: Sequence[int] = (128, 128),
+        dynamics_hidden_dims: Sequence[int] = (64, 64),
+    ) -> None:
+        super().__init__()
+        if feature_dim <= 0:
+            raise ValueError("feature_dim must be positive")
+        if cycle_scale <= 0 or target_scale <= 0:
+            raise ValueError("cycle_scale and target_scale must be positive")
+        self.feature_dim = feature_dim
+        self.surrogate = MLP(feature_dim + 1, surrogate_hidden_dims, 1)
+        self.dynamics_network = MLP(2, dynamics_hidden_dims, 1)
+        self.register_buffer("cycle_mean", torch.tensor([cycle_mean], dtype=torch.float32))
+        self.register_buffer("cycle_scale", torch.tensor([cycle_scale], dtype=torch.float32))
+        self.register_buffer("target_mean", torch.tensor([target_mean], dtype=torch.float32))
+        self.register_buffer("target_scale", torch.tensor([target_scale], dtype=torch.float32))
+
+    @classmethod
+    def from_scalers(
+        cls,
+        scalers: DatasetScalers,
+        *,
+        feature_dim: int,
+        surrogate_hidden_dims: Sequence[int] = (128, 128),
+        dynamics_hidden_dims: Sequence[int] = (64, 64),
+    ) -> "DeepHPMRULNN":
+        if scalers.target_rul is None:
+            raise ValueError("DatasetScalers does not contain a training-fitted RUL scaler")
+        return cls(
+            feature_dim=feature_dim,
+            cycle_mean=float(scalers.cycle.mean[0]),
+            cycle_scale=float(scalers.cycle.scale[0]),
+            target_mean=float(scalers.target_rul.mean[0]),
+            target_scale=float(scalers.target_rul.scale[0]),
+            surrogate_hidden_dims=surrogate_hidden_dims,
+            dynamics_hidden_dims=dynamics_hidden_dims,
+        )
+
+    @property
+    def physical_rate_scale(self) -> torch.Tensor:
+        """Convert normalized RUL/normalized cycle to cycles per cycle."""
+
+        return self.target_scale / self.cycle_scale
+
+    def forward(
+        self,
+        features_normalized: torch.Tensor,
+        cycle_raw: torch.Tensor,
+        *,
+        create_graph: bool = True,
+    ) -> DeepHPMRULOutput:
+        if features_normalized.ndim != 2:
+            raise ValueError("features_normalized must have shape [batch, features]")
+        if cycle_raw.ndim != 2 or cycle_raw.shape[1] != 1:
+            raise ValueError("cycle_raw must have shape [batch, 1]")
+        if features_normalized.shape != (cycle_raw.shape[0], self.feature_dim):
+            raise ValueError("feature shape does not match cycle batch or feature_dim")
+        if not features_normalized.is_floating_point() or not cycle_raw.is_floating_point():
+            raise TypeError("features and cycle must be floating-point tensors")
+        cycle_for_grad = (
+            cycle_raw if cycle_raw.requires_grad
+            else cycle_raw.detach().clone().requires_grad_(True)
+        )
+        with torch.enable_grad():
+            cycle_normalized = (cycle_for_grad - self.cycle_mean) / self.cycle_scale
+            rul_normalized = self.surrogate(
+                torch.cat((features_normalized, cycle_normalized), dim=-1)
+            )
+            rul = rul_normalized * self.target_scale + self.target_mean
+            derivative = time_derivative(rul, cycle_for_grad, create_graph=create_graph)
+            dynamics_normalized = self.dynamics_network(
+                torch.cat((cycle_normalized, rul_normalized), dim=-1)
+            )
+            dynamics = dynamics_normalized * self.physical_rate_scale
+            residual = derivative - dynamics
+            residual_normalized = residual / self.physical_rate_scale
+        return DeepHPMRULOutput(
+            rul=rul,
+            rul_normalized=rul_normalized,
+            cycle_raw=cycle_for_grad,
+            cycle_normalized=cycle_normalized,
+            time_derivative=derivative,
             dynamics=dynamics,
             residual=residual,
             residual_normalized=residual_normalized,

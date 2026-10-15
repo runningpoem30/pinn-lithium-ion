@@ -15,12 +15,22 @@ documented in `artifacts/rul/task_definition/rul_task_definition.md` and
 [`docs/verhulst_rul.md`](docs/verhulst_rul.md). The Verhulst RUL implementation
 learns `U = PCL = 1 - SoH` and analytically estimates the number of cycles until
 `U = 0.20` (SoH = 0.80); it does not impose a logistic curve directly on RUL.
+The direct-RUL DeepHPM state, learned-dynamics units, autograd derivative, and
+scientific limitations are documented in
+[`docs/deephpm_rul.md`](docs/deephpm_rul.md).
 
 Reproduce Step 15 with:
 
 ```bash
 PYTHONPATH=. .venv/bin/python -m src.run_verhulst_rul tune
 PYTHONPATH=. .venv/bin/python -m src.run_verhulst_rul final
+```
+
+Reproduce the Step 16 DeepHPM RUL experiment with:
+
+```bash
+PYTHONPATH=. .venv/bin/python -m src.run_deephpm_rul tune
+PYTHONPATH=. .venv/bin/python -m src.run_deephpm_rul final
 ```
 
 Validation-only tuning reports are written under
