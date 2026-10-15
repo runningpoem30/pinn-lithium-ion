@@ -82,3 +82,9 @@ per-seed, seed-aggregate, ensemble, per-battery, percentile, and physics
 residual results as CSV/JSON/Markdown. Seven presentation figures are available
 as 300-DPI PNG, SVG, and PDF. Regenerate with `python -m src.compare_soh`; the
 command reads prediction artifacts only and never loads or trains a model.
+
+`rul/task_definition/` contains the Step 13 RUL audit and frozen evaluation
+protocol. It reconstructs all cycle-level labels battery-wise, records the
+legacy capacity-threshold definition and endpoint-row behavior, preserves the
+official splits, and exports an immutable test reference. Generate it with
+`python -m src.rul_audit`; no neural network is imported or trained.
