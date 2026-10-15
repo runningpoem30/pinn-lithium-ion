@@ -1,0 +1,154 @@
+{
+  "source_artifacts": [
+    {
+      "path": "artifacts/comparisons/soh/comparison_summary.json",
+      "sha256": "ab9b5452e8d8af86f4b96a05f92c069b6cacb1495f85111726a6b895d5013434"
+    },
+    {
+      "path": "artifacts/comparisons/soh/aggregate_metrics.csv",
+      "sha256": "c2a5973823f4cef73ac6d0fac49898dbbb784f8a3e38fa9d07d6b90bb30eab4f"
+    },
+    {
+      "path": "artifacts/comparisons/soh/ensemble_metrics.csv",
+      "sha256": "14b64888e5200c1e30264518f7c9fcc0dc536dff68c3049c47198ced2cea7e7f"
+    },
+    {
+      "path": "artifacts/comparisons/rul/comparison_summary.json",
+      "sha256": "c91f002e602d29986c5c05ea0e496f773d3b3cfd7380c6f93dbcb5d6bb18e601"
+    },
+    {
+      "path": "artifacts/comparisons/rul/aggregate_metrics.csv",
+      "sha256": "66372ce32dd177c6fa361df06f0f6d9b86870d67fdb43f74e7d7b46a63c695d3"
+    },
+    {
+      "path": "artifacts/comparisons/rul/ensemble_metrics.csv",
+      "sha256": "550d52dd3004917e44ce120d10fdf997f250afd61fdf4cd08954671b19b18937"
+    },
+    {
+      "path": "artifacts/comparisons/rul/life_region_metrics.csv",
+      "sha256": "fc644158bacf317c6a09e9267b4e8c2b1c6b9309278d22c71eb31c55e484341f"
+    }
+  ],
+  "packaged_files": [
+    {
+      "path": "README.md",
+      "sha256": "cf346595ca6e2a0e932752f645344d58e9f15cf849647687741b0a1600049a75",
+      "bytes": 927
+    },
+    {
+      "path": "combined_physics_residual_analysis.md",
+      "sha256": "a56aa62710dbca10126fc34a5208f60ca612ac053f655637996e37045d8d30fc",
+      "bytes": 639
+    },
+    {
+      "path": "combined_physics_residual_bins.csv",
+      "sha256": "15a27ca046b1e90b833e0c5d440fc7e27cbb3eef09275e3ab96b682bb6f83f5e",
+      "bytes": 19880
+    },
+    {
+      "path": "combined_physics_residual_summary.json",
+      "sha256": "4199f10e08951434d18cda7012da13534199032fe1e857d058320c2a54b5deb9",
+      "bytes": 1772
+    },
+    {
+      "path": "compact_results_table.csv",
+      "sha256": "4e2e9eff3d6048f4b763eec19e3bc304830676afa3e1c7b727d46e21dec83d1e",
+      "bytes": 2060
+    },
+    {
+      "path": "figure_captions.csv",
+      "sha256": "1f0aa9b1b040cd190ba6d3d10f5ac70e7418d4010e5574bf713cd3f7cd949d4f",
+      "bytes": 1591
+    },
+    {
+      "path": "figures/01_cross_task_results_overview.png",
+      "sha256": "866085cdcdce7757c374aed14f178a0045121fb15858a71e00afa48d782dbae3",
+      "bytes": 292645
+    },
+    {
+      "path": "figures/02_soh_metric_comparison.png",
+      "sha256": "6e95a9e7744039bff8ed936676a24274c91e5c25cd05dbae5d1990e65a08417c",
+      "bytes": 256536
+    },
+    {
+      "path": "figures/02b_soh_trajectories.png",
+      "sha256": "9d5681ff0984f40ac577bd709599645365076248414e8c62c7885d0f7c6ec34c",
+      "bytes": 474936
+    },
+    {
+      "path": "figures/03_rul_actual_vs_predicted.png",
+      "sha256": "c970fea064273f58169f633974734a3619ac9df45a751c94c3f705729c27c984",
+      "bytes": 905049
+    },
+    {
+      "path": "figures/04_rul_error_across_life.png",
+      "sha256": "7b478ff3fb21727e41ddd5ea0fdfbb8db6bce6a026321f468f33949fea9e7c7f",
+      "bytes": 469685
+    },
+    {
+      "path": "figures/04b_rul_horizon_error.png",
+      "sha256": "d72ad943bf58632cb72b5d52998d030e2fcc5368935f5949bd29d13df52dacbe",
+      "bytes": 171473
+    },
+    {
+      "path": "figures/05_soh_physics_residuals.png",
+      "sha256": "80854b46176519040028256423a3e13bb18e2ff1d76005945815b51db097eb32",
+      "bytes": 802626
+    },
+    {
+      "path": "figures/05b_rul_physics_residuals.png",
+      "sha256": "e8ea7b968bafa121d6e2f8a9143697c23774e06511cc57c0226d93c93aa66221",
+      "bytes": 1382070
+    },
+    {
+      "path": "figures/06_combined_soh_rul_physics_residuals.pdf",
+      "sha256": "2ab11c333a19c5ffe0f1c7beee3157eddd973338f31dc5b07946210ca29b7623",
+      "bytes": 24088
+    },
+    {
+      "path": "figures/06_combined_soh_rul_physics_residuals.png",
+      "sha256": "b3d6a8bf312c5588a2f8e863d8211c64478e0d134211486d81792e75c0ac40f3",
+      "bytes": 559730
+    },
+    {
+      "path": "figures/06_combined_soh_rul_physics_residuals.svg",
+      "sha256": "615187f9fbf154dc821f2e74cea44372db7085cba2056f582c422058a5c8637f",
+      "bytes": 102449
+    },
+    {
+      "path": "key_findings.csv",
+      "sha256": "8864177c3b0f34fa149afb7bd34754e92b6256cf84b9f2c1ee23f0919022f0bd",
+      "bytes": 781
+    },
+    {
+      "path": "key_findings.md",
+      "sha256": "3c4ab82080e49b12540c9034f5837c8ae775d4e1b44774cab513baab7f364a85",
+      "bytes": 696
+    },
+    {
+      "path": "limitations.md",
+      "sha256": "96be4f98770eeb6805a91f767279233eb6575b32c485fa22e3e0d249d80280b2",
+      "bytes": 1221
+    },
+    {
+      "path": "reproducibility.md",
+      "sha256": "a1b981f6fc65e1603d10143c37a654e5a1384644ebf0185de8dfeae8df3a94eb",
+      "bytes": 586
+    },
+    {
+      "path": "results_package.json",
+      "sha256": "3bb0686ab610556e77e41b014bb951741c604f52a8409905147c66fe90b088f3",
+      "bytes": 12066
+    },
+    {
+      "path": "rul_life_region_summary.csv",
+      "sha256": "d2ce3528c2966b4b56a03aeccdbc820151bc0db0a1cf6e2f41f123c09f1c7b95",
+      "bytes": 1062
+    },
+    {
+      "path": "slide_plan.md",
+      "sha256": "40a42839fc224d41670952c2d1d6762b8cb254d96ef125b24efcd0e85228f06b",
+      "bytes": 3002
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "records": 41240,
+  "batteries": 40,
+  "x_axis": "elapsed life fraction = cycle / audited eol_cycle",
+  "band_definition": "10th to 90th percentile of ensemble-mean residual within 25 life-fraction bins",
+  "global_metrics": [
+    {
+      "task": "SoH",
+      "model": "VerhulstPINN",
+      "units": "PCL per cycle",
+      "records": 41240,
+      "residual_mae": 9.799090761813661e-05,
+      "residual_rmse": 0.0001328869468304441,
+      "residual_mean": -9.561643721619912e-05
+    },
+    {
+      "task": "SoH",
+      "model": "DeepHPMNN",
+      "units": "PCL per cycle",
+      "records": 41240,
+      "residual_mae": 9.469391654580807e-06,
+      "residual_rmse": 1.1002359764654678e-05,
+      "residual_mean": -6.977365140774851e-06
+    },
+    {
+      "task": "RUL",
+      "model": "VerhulstPINN",
+      "units": "PCL per cycle",
+      "records": 41240,
+      "residual_mae": 0.0002011532414996651,
+      "residual_rmse": 0.00022169009672812892,
+      "residual_mean": -0.0002011532414996651
+    },
+    {
+      "task": "RUL",
+      "model": "DeepHPMNN",
+      "units": "cycles per cycle",
+      "records": 41240,
+      "residual_mae": 0.0379122011931892,
+      "residual_rmse": 0.04519320327475016,
+      "residual_mean": 0.03127255683420594
+    }
+  ],
+  "interpretation": [
+    "SoH residuals share PCL/cycle units, so their magnitudes may be compared as internal consistency diagnostics.",
+    "DeepHPM has the smaller SoH residual, while Verhulst has the better SoH prediction metrics; residual size is not prediction accuracy.",
+    "RUL Verhulst and RUL DeepHPM residuals have different units and must not be numerically compared.",
+    "Residuals describe agreement with each model's equation, not proof that the learned dynamics are physically correct."
+  ]
+}

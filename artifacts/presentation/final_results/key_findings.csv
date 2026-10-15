@@ -1,0 +1,7 @@
+id,finding
+soh_result,"VerhulstPINN has the lowest ensemble SoH RMSE (0.01457), 5.84% below DataDrivenNN."
+rul_cycle_weighted,DataDrivenNN has the lowest cycle-weighted ensemble RUL RMSE (324.47 cycles).
+rul_battery_weighted,"VerhulstPINN has the lowest mean per-battery ensemble RUL RMSE (241.45 cycles), showing that weighting changes the ranking."
+early_life,"DeepHPMNN is strongest in early-life ensemble RUL RMSE (481.99 cycles), but DataDrivenNN is strongest late in life (72.97 cycles)."
+bias,"All RUL ensembles have substantial negative bias, especially for long-horizon early-life predictions."
+physics_guardrail,"Physics residual magnitude measures internal equation consistency, not prediction accuracy; the RUL residuals also have different units across PINNs."

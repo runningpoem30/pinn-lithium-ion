@@ -1,0 +1,10 @@
+slide,task,file,title,caption
+1,SoH + RUL,figures/01_cross_task_results_overview.png,Cross-task result overview,Ensemble SoH and RUL metrics on the same 40 held-out batteries. Results are descriptive and were not used for model selection.
+2,SOH,figures/02_soh_metric_comparison.png,SoH accuracy across three fixed seeds,"VerhulstPINN has the lowest SoH error, but all three models remain close."
+2,SOH,figures/02b_soh_trajectories.png,Representative held-out SoH trajectories,Measured and predicted degradation paths with ±1 seed standard deviation.
+3,RUL,figures/03_rul_actual_vs_predicted.png,Actual versus predicted RUL,All models underpredict long-horizon RUL; the data-driven ensemble has the lowest cycle-weighted RMSE.
+4,RUL,figures/04_rul_error_across_life.png,RUL error across battery life,Early-life RUL is substantially harder than late-life prediction.
+4,RUL,figures/04b_rul_horizon_error.png,RUL error by prediction horizon,Prediction error rises strongly as the remaining-life horizon increases.
+5,SOH,figures/05_soh_physics_residuals.png,SoH physics residual diagnostics,Residual consistency is a diagnostic and is not equivalent to predictive accuracy.
+5,RUL,figures/05b_rul_physics_residuals.png,RUL physics residual diagnostics,Verhulst and DeepHPM residuals are separated because their physical units differ.
+5,SoH + RUL,figures/06_combined_soh_rul_physics_residuals.png,Combined SoH and RUL physics residuals,Residuals across elapsed battery life. SoH residuals share PCL/cycle units; the two RUL panels use different units and must be interpreted separately.

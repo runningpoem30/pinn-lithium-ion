@@ -43,6 +43,17 @@ The comparison tables and 300-DPI figures are saved under
 `artifacts/comparisons/rul`; the presentation notebook is
 `notebooks/17_rul_model_comparison.ipynb`.
 
+Build the Step 18 final presentation-ready package from the saved SoH and RUL
+comparison artifacts:
+
+```bash
+PYTHONPATH=. .venv/bin/python -m src.package_results
+```
+
+The resulting compact tables, selected figures, captions, slide plan,
+limitations, checksums, and reproducibility notes are written to
+`artifacts/presentation/final_results`.
+
 Validation-only tuning reports are written under
 `artifacts/verhulst/rul/physics_weight_tuning`, and the three frozen-seed test
 evaluations are written under `artifacts/verhulst/rul/final`.

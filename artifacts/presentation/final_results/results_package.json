@@ -1,0 +1,326 @@
+{
+  "package": "Final SoH and RUL results package",
+  "created_from_saved_artifacts_only": true,
+  "retraining_performed": false,
+  "test_results_used_for_model_selection": false,
+  "cohort": {
+    "records": 41240,
+    "batteries": 40,
+    "seeds": [
+      1234,
+      2345,
+      3456
+    ],
+    "keys_identical_across_tasks": true
+  },
+  "compact_results": [
+    {
+      "task": "SoH",
+      "model": "data_driven",
+      "model_label": "DataDrivenNN",
+      "seed_mean_mae": 0.013322499515616716,
+      "seed_sd_mae": 0.0017009787853613882,
+      "seed_mean_rmse": 0.015665649521466846,
+      "seed_sd_rmse": 0.0016396937004570236,
+      "seed_mean_r2": 0.8441138673404738,
+      "seed_sd_r2": 0.031418272761494934,
+      "seed_mean_bias": 0.01280847925626172,
+      "seed_sd_bias": 0.0021499235292463457,
+      "ensemble_mae": 0.01315938734770207,
+      "ensemble_rmse": 0.015474733964917685,
+      "ensemble_r2": 0.8489931442679448,
+      "ensemble_bias": 0.012808479256261721,
+      "ensemble_absolute_error_p95": 0.02710431813500009,
+      "mean_per_battery_ensemble_rmse": 0.013838578012185293
+    },
+    {
+      "task": "SoH",
+      "model": "verhulst",
+      "model_label": "VerhulstPINN",
+      "seed_mean_mae": 0.012476976403488521,
+      "seed_sd_mae": 0.0016032177102122678,
+      "seed_mean_rmse": 0.014790476738360295,
+      "seed_sd_rmse": 0.0015192683801646843,
+      "seed_mean_r2": 0.8610818990079601,
+      "seed_sd_r2": 0.027648819419795287,
+      "seed_mean_bias": 0.011761140124135145,
+      "seed_sd_bias": 0.0020763190159837413,
+      "ensemble_mae": 0.012304025596682833,
+      "ensemble_rmse": 0.014570270270363348,
+      "ensemble_r2": 0.8661293114322014,
+      "ensemble_bias": 0.011761140124135143,
+      "ensemble_absolute_error_p95": 0.025770483370000048,
+      "mean_per_battery_ensemble_rmse": 0.013411810391696635
+    },
+    {
+      "task": "SoH",
+      "model": "deephpm",
+      "model_label": "DeepHPMNN",
+      "seed_mean_mae": 0.013322163279768024,
+      "seed_sd_mae": 0.0017015061053087927,
+      "seed_mean_rmse": 0.015664914811827597,
+      "seed_sd_rmse": 0.0016402759049241088,
+      "seed_mean_r2": 0.8441275801207618,
+      "seed_sd_r2": 0.03142744274729508,
+      "seed_mean_bias": 0.012808160547160524,
+      "seed_sd_bias": 0.002150575584498191,
+      "ensemble_mae": 0.0131590969870021,
+      "ensemble_rmse": 0.015474042685780957,
+      "ensemble_r2": 0.8490066353634981,
+      "ensemble_bias": 0.012808160547160526,
+      "ensemble_absolute_error_p95": 0.02710033754833327,
+      "mean_per_battery_ensemble_rmse": 0.013838145882254304
+    },
+    {
+      "task": "RUL",
+      "model": "data_driven",
+      "model_label": "DataDrivenNN",
+      "seed_mean_mae": 230.5702847022735,
+      "seed_sd_mae": 10.204444050802238,
+      "seed_mean_rmse": 326.637508024322,
+      "seed_sd_rmse": 12.897466606200242,
+      "seed_mean_r2": 0.2704291624371128,
+      "seed_sd_r2": 0.05798721875671019,
+      "seed_mean_bias": -205.12552965662584,
+      "seed_sd_bias": 21.48605927942787,
+      "ensemble_mae": 227.3427511426513,
+      "ensemble_rmse": 324.472221249493,
+      "ensemble_r2": 0.28081730570348484,
+      "ensemble_bias": -205.12552965662582,
+      "ensemble_absolute_error_p95": 705.2188822316652,
+      "mean_per_battery_ensemble_rmse": 245.15184222415687
+    },
+    {
+      "task": "RUL",
+      "model": "verhulst",
+      "model_label": "VerhulstPINN",
+      "seed_mean_mae": 236.5102453850328,
+      "seed_sd_mae": 20.448810219489086,
+      "seed_mean_rmse": 340.1174064487301,
+      "seed_sd_rmse": 23.08355043950038,
+      "seed_mean_r2": 0.20736452690658905,
+      "seed_sd_r2": 0.10933320258522185,
+      "seed_mean_bias": -183.21079821742316,
+      "seed_sd_bias": 38.38457168743064,
+      "ensemble_mae": 234.09101253414556,
+      "ensemble_rmse": 336.91535715862074,
+      "ensemble_r2": 0.224599995348028,
+      "ensemble_bias": -183.21079821742316,
+      "ensemble_absolute_error_p95": 793.746693929036,
+      "mean_per_battery_ensemble_rmse": 241.45114310064656
+    },
+    {
+      "task": "RUL",
+      "model": "deephpm",
+      "model_label": "DeepHPMNN",
+      "seed_mean_mae": 240.81298822427004,
+      "seed_sd_mae": 25.5711034823918,
+      "seed_mean_rmse": 330.5342843708004,
+      "seed_sd_rmse": 25.99295211723664,
+      "seed_mean_r2": 0.25061668873952747,
+      "seed_sd_r2": 0.1194430502253822,
+      "seed_mean_bias": -235.4871529474021,
+      "seed_sd_bias": 29.424360773858904,
+      "ensemble_mae": 238.87943825979195,
+      "ensemble_rmse": 328.9455193801497,
+      "ensemble_r2": 0.2608507593950762,
+      "ensemble_bias": -235.48715294740208,
+      "ensemble_absolute_error_p95": 736.4317754109696,
+      "mean_per_battery_ensemble_rmse": 242.91730927498992
+    }
+  ],
+  "rul_life_regions": [
+    {
+      "model": "data_driven",
+      "model_label": "DataDrivenNN",
+      "region": "early",
+      "records": 13733,
+      "mae_cycles": 430.60223050870894,
+      "rmse_cycles": 501.0761400272224,
+      "r2": -1.5211983155581477,
+      "bias_cycles": -430.60223050870894
+    },
+    {
+      "model": "data_driven",
+      "model_label": "DataDrivenNN",
+      "region": "middle",
+      "records": 13757,
+      "mae_cycles": 195.09039566648664,
+      "rmse_cycles": 244.22902933668297,
+      "r2": -0.3535280513658705,
+      "bias_cycles": -193.8047816350214
+    },
+    {
+      "model": "data_driven",
+      "model_label": "DataDrivenNN",
+      "region": "late",
+      "records": 13750,
+      "mae_cycles": 56.60334926276239,
+      "rmse_cycles": 72.9728579845931,
+      "r2": 0.6728645557905132,
+      "bias_cycles": 8.745888690170247
+    },
+    {
+      "model": "verhulst",
+      "model_label": "VerhulstPINN",
+      "region": "early",
+      "records": 13733,
+      "mae_cycles": 428.2466037007378,
+      "rmse_cycles": 514.8029525779672,
+      "r2": -1.661225155292716,
+      "bias_cycles": -426.63588141325585
+    },
+    {
+      "model": "verhulst",
+      "model_label": "VerhulstPINN",
+      "region": "middle",
+      "records": 13757,
+      "mae_cycles": 184.78825586756213,
+      "rmse_cycles": 255.1862968747951,
+      "r2": -0.47770381107346216,
+      "bias_cycles": -180.67763965374968
+    },
+    {
+      "model": "verhulst",
+      "model_label": "VerhulstPINN",
+      "region": "late",
+      "records": 13750,
+      "mae_cycles": 89.50332453206381,
+      "rmse_cycles": 102.9840039042755,
+      "r2": 0.348454971697972,
+      "bias_cycles": 57.3788748856978
+    },
+    {
+      "model": "deephpm",
+      "model_label": "DeepHPMNN",
+      "region": "early",
+      "records": 13733,
+      "mae_cycles": 407.6579677069105,
+      "rmse_cycles": 481.98711445601793,
+      "r2": -1.3327619216255222,
+      "bias_cycles": -407.6579677069105
+    },
+    {
+      "model": "deephpm",
+      "model_label": "DeepHPMNN",
+      "region": "middle",
+      "records": 13757,
+      "mae_cycles": 244.05194199053173,
+      "rmse_cycles": 289.3990595309606,
+      "r2": -0.9004958468109465,
+      "bias_cycles": -244.0398169702355
+    },
+    {
+      "model": "deephpm",
+      "model_label": "DeepHPMNN",
+      "region": "late",
+      "records": 13750,
+      "mae_cycles": 65.13444344371449,
+      "rmse_cycles": 93.37001469316851,
+      "r2": 0.46442568121220407,
+      "bias_cycles": -54.972185816169514
+    }
+  ],
+  "key_findings": [
+    {
+      "id": "soh_result",
+      "finding": "VerhulstPINN has the lowest ensemble SoH RMSE (0.01457), 5.84% below DataDrivenNN."
+    },
+    {
+      "id": "rul_cycle_weighted",
+      "finding": "DataDrivenNN has the lowest cycle-weighted ensemble RUL RMSE (324.47 cycles)."
+    },
+    {
+      "id": "rul_battery_weighted",
+      "finding": "VerhulstPINN has the lowest mean per-battery ensemble RUL RMSE (241.45 cycles), showing that weighting changes the ranking."
+    },
+    {
+      "id": "early_life",
+      "finding": "DeepHPMNN is strongest in early-life ensemble RUL RMSE (481.99 cycles), but DataDrivenNN is strongest late in life (72.97 cycles)."
+    },
+    {
+      "id": "bias",
+      "finding": "All RUL ensembles have substantial negative bias, especially for long-horizon early-life predictions."
+    },
+    {
+      "id": "physics_guardrail",
+      "finding": "Physics residual magnitude measures internal equation consistency, not prediction accuracy; the RUL residuals also have different units across PINNs."
+    }
+  ],
+  "limitations": [
+    "Only three random seeds were run, so uncertainty estimates are descriptive rather than inferential.",
+    "Evaluation uses one fixed 40-battery held-out cohort from the same dataset; external-dataset generalization was not tested.",
+    "RUL ground truth follows the audited operational label RUL_Flt = cycle_life - cycle. The legacy intended 80% SoH threshold was not persisted consistently in preprocessing.",
+    "RUL rankings differ between cycle-weighted and battery-weighted metrics; neither should be presented as a universal winner.",
+    "All RUL models underpredict long-horizon remaining life, producing substantial negative bias and weak early-life accuracy.",
+    "A small PINN residual does not prove that the learned dynamics are physically correct or improve held-out prediction.",
+    "Verhulst RUL residuals use PCL/cycle, whereas DeepHPM RUL residuals use cycles/cycle; their numerical magnitudes cannot be compared directly.",
+    "DeepHPM RUL learned dynamics did not recover the audited ideal derivative dRUL/dcycle = -1, revealing an identifiability limitation.",
+    "The comparison describes frozen test performance only. It must not be used for further model or hyperparameter selection."
+  ],
+  "figure_captions": [
+    {
+      "slide": 1,
+      "task": "SoH + RUL",
+      "file": "figures/01_cross_task_results_overview.png",
+      "title": "Cross-task result overview",
+      "caption": "Ensemble SoH and RUL metrics on the same 40 held-out batteries. Results are descriptive and were not used for model selection."
+    },
+    {
+      "slide": 2,
+      "task": "SOH",
+      "file": "figures/02_soh_metric_comparison.png",
+      "title": "SoH accuracy across three fixed seeds",
+      "caption": "VerhulstPINN has the lowest SoH error, but all three models remain close."
+    },
+    {
+      "slide": 2,
+      "task": "SOH",
+      "file": "figures/02b_soh_trajectories.png",
+      "title": "Representative held-out SoH trajectories",
+      "caption": "Measured and predicted degradation paths with \u00b11 seed standard deviation."
+    },
+    {
+      "slide": 3,
+      "task": "RUL",
+      "file": "figures/03_rul_actual_vs_predicted.png",
+      "title": "Actual versus predicted RUL",
+      "caption": "All models underpredict long-horizon RUL; the data-driven ensemble has the lowest cycle-weighted RMSE."
+    },
+    {
+      "slide": 4,
+      "task": "RUL",
+      "file": "figures/04_rul_error_across_life.png",
+      "title": "RUL error across battery life",
+      "caption": "Early-life RUL is substantially harder than late-life prediction."
+    },
+    {
+      "slide": 4,
+      "task": "RUL",
+      "file": "figures/04b_rul_horizon_error.png",
+      "title": "RUL error by prediction horizon",
+      "caption": "Prediction error rises strongly as the remaining-life horizon increases."
+    },
+    {
+      "slide": 5,
+      "task": "SOH",
+      "file": "figures/05_soh_physics_residuals.png",
+      "title": "SoH physics residual diagnostics",
+      "caption": "Residual consistency is a diagnostic and is not equivalent to predictive accuracy."
+    },
+    {
+      "slide": 5,
+      "task": "RUL",
+      "file": "figures/05b_rul_physics_residuals.png",
+      "title": "RUL physics residual diagnostics",
+      "caption": "Verhulst and DeepHPM residuals are separated because their physical units differ."
+    },
+    {
+      "slide": 5,
+      "task": "SoH + RUL",
+      "file": "figures/06_combined_soh_rul_physics_residuals.png",
+      "title": "Combined SoH and RUL physics residuals",
+      "caption": "Residuals across elapsed battery life. SoH residuals share PCL/cycle units; the two RUL panels use different units and must be interpreted separately."
+    }
+  ]
+}
