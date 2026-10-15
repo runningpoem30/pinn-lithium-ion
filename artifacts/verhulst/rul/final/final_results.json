@@ -1,0 +1,151 @@
+{
+  "experiment": "Final Verhulst trajectory-derived RUL",
+  "rul_method": "analytic PCL threshold crossing",
+  "eol_pcl_threshold": 0.2,
+  "physics_weight": 0.001,
+  "model_selection_data": "validation only",
+  "test_evaluation_timing": "once per seed after checkpoint restoration",
+  "per_seed": [
+    {
+      "seed": 1234,
+      "best_epoch": 28,
+      "epochs_completed": 38,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 218.41652225324185,
+      "rmse": 325.4931355754364,
+      "r2": 0.27628453560641675,
+      "bias": -172.1006322538818,
+      "signed_error_p05": -757.9782302856445,
+      "signed_error_p50": -112.68414306640625,
+      "signed_error_p95": 117.16110687255855,
+      "absolute_error_p50": 128.39454650878906,
+      "absolute_error_p90": 509.8825073242187,
+      "absolute_error_p95": 758.7790695190422,
+      "absolute_error_p99": 1117.3810998535157,
+      "battery_macro_mae": 183.76374270438248,
+      "battery_macro_rmse": 227.7232275466669,
+      "battery_macro_bias": -132.57062666292518,
+      "negative_prediction_count": 0,
+      "negative_prediction_fraction": 0.0,
+      "physical_residual_mae": 0.00019503339934198762,
+      "physical_residual_rmse": 0.00022276445000698062,
+      "threshold_crossing_possible_count": 41230,
+      "threshold_reached_count": 0,
+      "non_crossing_count": 10,
+      "non_crossing_fraction": 0.00024248302618816683,
+      "rate_r_per_cycle": 0.005166835151612759,
+      "capacity_K_pcl": 0.5370056629180908,
+      "offset_C_pcl": 0.009326807223260403
+    },
+    {
+      "seed": 2345,
+      "best_epoch": 7,
+      "epochs_completed": 17,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 232.41873845193828,
+      "rmse": 328.13062152797465,
+      "r2": 0.2645084170598726,
+      "bias": -151.60678402468722,
+      "signed_error_p05": -763.8945388793945,
+      "signed_error_p50": -96.03770446777344,
+      "signed_error_p95": 174.56848373413087,
+      "absolute_error_p50": 159.032470703125,
+      "absolute_error_p90": 521.070263671875,
+      "absolute_error_p95": 763.8945388793941,
+      "absolute_error_p99": 1094.1407519531251,
+      "battery_macro_mae": 200.40327238957101,
+      "battery_macro_rmse": 240.57583447452606,
+      "battery_macro_bias": -111.57261658864267,
+      "negative_prediction_count": 0,
+      "negative_prediction_fraction": 0.0,
+      "physical_residual_mae": 0.00018402376899687083,
+      "physical_residual_rmse": 0.0001986221201806192,
+      "threshold_crossing_possible_count": 41240,
+      "threshold_reached_count": 0,
+      "non_crossing_count": 0,
+      "non_crossing_fraction": 0.0,
+      "rate_r_per_cycle": 0.004683853592723608,
+      "capacity_K_pcl": 0.4910370111465454,
+      "offset_C_pcl": 0.009606767445802689
+    },
+    {
+      "seed": 3456,
+      "best_epoch": 31,
+      "epochs_completed": 41,
+      "stopped_early": true,
+      "records": 41240,
+      "batteries": 40,
+      "mae": 258.6954754499182,
+      "rmse": 366.7284622427793,
+      "r2": 0.08130062805347782,
+      "bias": -225.9249783737005,
+      "signed_error_p05": -856.1542938232421,
+      "signed_error_p50": -167.78614044189453,
+      "signed_error_p95": 105.88574600219712,
+      "absolute_error_p50": 168.5024871826172,
+      "absolute_error_p90": 599.5438568115233,
+      "absolute_error_p95": 856.1542938232413,
+      "absolute_error_p99": 1135.9801397705078,
+      "battery_macro_mae": 220.39389168139056,
+      "battery_macro_rmse": 267.1033322913539,
+      "battery_macro_bias": -183.16732678415147,
+      "negative_prediction_count": 0,
+      "negative_prediction_fraction": 0.0,
+      "physical_residual_mae": 0.00022440255616013697,
+      "physical_residual_rmse": 0.0002457099527040954,
+      "threshold_crossing_possible_count": 41240,
+      "threshold_reached_count": 0,
+      "non_crossing_count": 0,
+      "non_crossing_fraction": 0.0,
+      "rate_r_per_cycle": 0.005088379140943289,
+      "capacity_K_pcl": 0.5472460985183716,
+      "offset_C_pcl": 0.009387975558638573
+    }
+  ],
+  "aggregate": {
+    "mae": {
+      "mean": 236.5102453850328,
+      "std": 20.448810219489086
+    },
+    "rmse": {
+      "mean": 340.1174064487301,
+      "std": 23.08355043950038
+    },
+    "r2": {
+      "mean": 0.20736452690658905,
+      "std": 0.10933320258522185
+    },
+    "bias": {
+      "mean": -183.21079821742316,
+      "std": 38.38457168743064
+    },
+    "battery_macro_mae": {
+      "mean": 201.52030225844803,
+      "std": 18.340604415215545
+    },
+    "battery_macro_rmse": {
+      "mean": 245.13413143751563,
+      "std": 20.081875306547705
+    },
+    "battery_macro_bias": {
+      "mean": -142.43685667857312,
+      "std": 36.80295508564464
+    },
+    "physical_residual_mae": {
+      "mean": 0.00020115324149966513,
+      "std": 2.0873451181351203e-05
+    },
+    "physical_residual_rmse": {
+      "mean": 0.00022236550763056508,
+      "std": 2.3546451095749246e-05
+    },
+    "non_crossing_fraction": {
+      "mean": 8.082767539605561e-05,
+      "std": 0.00013999764044365318
+    }
+  }
+}

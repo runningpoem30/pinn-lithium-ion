@@ -66,6 +66,23 @@ class RULDataDrivenOutput:
     cycle_normalized: torch.Tensor
 
 
+@dataclass(frozen=True)
+class ThresholdCrossingOutput:
+    """Analytic time-to-EOL returned by the shifted Verhulst trajectory.
+
+    ``rul`` is in physical cycles.  ``crossing_possible`` marks samples for
+    which the current state lies strictly inside the future-crossing domain
+    ``C < U < U_eol < K``.  States already at/above EOL have zero RUL and are
+    marked by ``threshold_reached``.  Remaining states use the configured
+    finite horizon and are explicitly marked ``non_crossing``.
+    """
+
+    rul: torch.Tensor
+    crossing_possible: torch.Tensor
+    threshold_reached: torch.Tensor
+    non_crossing: torch.Tensor
+
+
 class MLP(nn.Module):
     """A deterministic fully connected network with smooth activations."""
 
@@ -286,6 +303,64 @@ def verhulst_rhs(
 
     return rate * (pcl - offset) * (
         1.0 - (pcl - offset) / (carrying_capacity - offset)
+    )
+
+
+def verhulst_time_to_threshold(
+    pcl: torch.Tensor,
+    rate: torch.Tensor,
+    carrying_capacity: torch.Tensor,
+    offset: torch.Tensor,
+    *,
+    threshold: float = 0.2,
+    non_crossing_horizon: float = 5000.0,
+    epsilon: float = 1e-6,
+) -> ThresholdCrossingOutput:
+    """Return analytic remaining cycles to a PCL threshold.
+
+    For ``dU/dt = r(U-C)(1-(U-C)/(K-C))``, define
+    ``y=(U-C)/(K-C)``.  Logistic integration gives
+
+    ``tau = (logit(y_eol) - logit(y))/r``.
+
+    This is a future crossing only when ``C < U < U_eol < K``.  The masks in
+    the return value make the two other cases non-silent: an already reached
+    threshold returns zero; a state that cannot cross under the learned
+    trajectory returns the declared finite reporting horizon.
+    """
+
+    if not 0.0 < threshold < 1.0:
+        raise ValueError("threshold must be a PCL fraction strictly inside (0, 1)")
+    if non_crossing_horizon <= 0 or epsilon <= 0:
+        raise ValueError("non_crossing_horizon and epsilon must be positive")
+    threshold_tensor = torch.as_tensor(
+        threshold, dtype=pcl.dtype, device=pcl.device
+    )
+    horizon = torch.as_tensor(
+        non_crossing_horizon, dtype=pcl.dtype, device=pcl.device
+    )
+    reached = pcl >= threshold_tensor
+    possible = (
+        (~reached)
+        & (pcl > offset + epsilon)
+        & (carrying_capacity > threshold_tensor + epsilon)
+    )
+    non_crossing = (~reached) & (~possible)
+
+    denominator = carrying_capacity - offset
+    y = (pcl - offset) / denominator
+    y_eol = (threshold_tensor - offset) / denominator
+    y_safe = torch.clamp(y, min=epsilon, max=1.0 - epsilon)
+    y_eol_safe = torch.clamp(y_eol, min=epsilon, max=1.0 - epsilon)
+    raw_time = (torch.logit(y_eol_safe) - torch.logit(y_safe)) / rate
+    raw_time = torch.clamp(raw_time, min=0.0, max=non_crossing_horizon)
+    rul = torch.where(reached, torch.zeros_like(raw_time), raw_time)
+    rul = torch.where(non_crossing, torch.full_like(raw_time, horizon), rul)
+    return ThresholdCrossingOutput(
+        rul=rul,
+        crossing_possible=possible,
+        threshold_reached=reached,
+        non_crossing=non_crossing,
     )
 
 

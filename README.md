@@ -10,6 +10,23 @@ The clean shifted-Verhulst formulation, state convention, constrained parameter
 transforms, and residual units are documented in
 [`docs/verhulst_pinn.md`](docs/verhulst_pinn.md).
 
+The audited RUL definition and the trajectory-derived Verhulst RUL method are
+documented in `artifacts/rul/task_definition/rul_task_definition.md` and
+[`docs/verhulst_rul.md`](docs/verhulst_rul.md). The Verhulst RUL implementation
+learns `U = PCL = 1 - SoH` and analytically estimates the number of cycles until
+`U = 0.20` (SoH = 0.80); it does not impose a logistic curve directly on RUL.
+
+Reproduce Step 15 with:
+
+```bash
+PYTHONPATH=. .venv/bin/python -m src.run_verhulst_rul tune
+PYTHONPATH=. .venv/bin/python -m src.run_verhulst_rul final
+```
+
+Validation-only tuning reports are written under
+`artifacts/verhulst/rul/physics_weight_tuning`, and the three frozen-seed test
+evaluations are written under `artifacts/verhulst/rul/final`.
+
 ```text
 Battery Data
      ↓
@@ -26,7 +43,9 @@ Physics-Informed Neural Network
 Final Model Evaluation
 ```
 
-At the current stage, the work has reached the beginning of the **baseline neural-network stage**.
+The clean pipeline now includes the DataDrivenNN RUL baseline and the
+trajectory-derived VerhulstPINN RUL experiment, in addition to the completed
+SoH experiments.
 
 ---
 

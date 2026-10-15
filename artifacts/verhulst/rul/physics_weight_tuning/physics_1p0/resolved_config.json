@@ -1,0 +1,45 @@
+{
+  "data": {
+    "dataset_path": "SeversonBattery.mat",
+    "batch_size": 2048,
+    "num_workers": 0
+  },
+  "model": {
+    "surrogate_hidden_dims": [
+      64,
+      64
+    ],
+    "dynamics_hidden_dims": [
+      32,
+      32
+    ]
+  },
+  "training": {
+    "seed": 1234,
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "physics_weight": 1.0,
+    "gradient_clip_norm": 5.0,
+    "early_stopping_patience": 7,
+    "early_stopping_min_delta": 0.1,
+    "early_stopping_monitor": "data",
+    "device": "cpu",
+    "max_train_batches": null,
+    "max_validation_batches": null
+  },
+  "output_dir": "artifacts/verhulst/rul/physics_weight_tuning/physics_1p0",
+  "model_type": "verhulst",
+  "task": "rul",
+  "rul_method": "analytic threshold crossing",
+  "state": "U=PCL=1-SoH",
+  "eol_definition": "U=0.20 (SoH=0.80)",
+  "crossing": {
+    "eol_pcl_threshold": 0.2,
+    "non_crossing_horizon_cycles": 5000.0,
+    "epsilon": 1e-06,
+    "pcl_data_weight": 1.0,
+    "non_crossing_penalty_weight": 1.0,
+    "non_crossing_margin": 0.0001
+  }
+}
