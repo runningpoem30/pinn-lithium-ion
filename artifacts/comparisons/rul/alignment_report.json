@@ -1,0 +1,16 @@
+{
+  "verified": true,
+  "key": [
+    "battery_id",
+    "cycle"
+  ],
+  "targets_identical": true,
+  "records": 41240,
+  "batteries": 40,
+  "seeds": [
+    1234,
+    2345,
+    3456
+  ],
+  "cohort_sha256": "417285698b19c81fa597c6fa81cceafbb926bf491f5155da04e50ffa16c91851"
+}

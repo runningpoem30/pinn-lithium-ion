@@ -33,6 +33,16 @@ PYTHONPATH=. .venv/bin/python -m src.run_deephpm_rul tune
 PYTHONPATH=. .venv/bin/python -m src.run_deephpm_rul final
 ```
 
+Generate the Step 17 saved-artifact RUL comparison without retraining:
+
+```bash
+PYTHONPATH=. .venv/bin/python -m src.compare_rul
+```
+
+The comparison tables and 300-DPI figures are saved under
+`artifacts/comparisons/rul`; the presentation notebook is
+`notebooks/17_rul_model_comparison.ipynb`.
+
 Validation-only tuning reports are written under
 `artifacts/verhulst/rul/physics_weight_tuning`, and the three frozen-seed test
 evaluations are written under `artifacts/verhulst/rul/final`.
