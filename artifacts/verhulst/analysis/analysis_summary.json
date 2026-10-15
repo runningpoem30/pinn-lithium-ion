@@ -1,0 +1,153 @@
+{
+  "method": "equal-weight mean of aligned seed predictions",
+  "alignment_key": [
+    "battery_id",
+    "cycle"
+  ],
+  "seeds": [
+    1234,
+    2345,
+    3456
+  ],
+  "records": 41240,
+  "batteries": 40,
+  "ensemble_metrics": {
+    "mae": 0.012304025596682833,
+    "rmse": 0.014570270270363348,
+    "r2": 0.8661293114322014,
+    "bias": 0.011761140124135143,
+    "signed_error_p05": -0.001768186680000049,
+    "signed_error_p50": 0.012057503066666642,
+    "signed_error_p95": 0.025770483370000048,
+    "absolute_error_p50": 0.012121508566666717,
+    "absolute_error_p90": 0.021879949203333377,
+    "absolute_error_p95": 0.025770483370000048,
+    "absolute_error_p99": 0.03343895352999998
+  },
+  "per_seed_metrics": [
+    {
+      "seed": 1234,
+      "mae": 0.01368378809219932,
+      "rmse": 0.01595062350641701,
+      "r2": 0.839562601937822,
+      "bias": 0.013331984395230362,
+      "signed_error_p05": -0.0005140602049999775,
+      "signed_error_p50": 0.013778448100000007,
+      "signed_error_p95": 0.028477454239999946,
+      "absolute_error_p50": 0.013778448100000007,
+      "absolute_error_p90": 0.02363069657000002,
+      "absolute_error_p95": 0.028477454239999946,
+      "absolute_error_p99": 0.036566563270000046
+    },
+    {
+      "seed": 2345,
+      "mae": 0.01308930539343356,
+      "rmse": 0.01535001777087549,
+      "r2": 0.8514173681099696,
+      "bias": 0.01254429596341416,
+      "signed_error_p05": -0.001622378815000013,
+      "signed_error_p50": 0.012605279649999968,
+      "signed_error_p95": 0.026859846630000066,
+      "absolute_error_p50": 0.012734323799999947,
+      "absolute_error_p90": 0.023310297770000037,
+      "absolute_error_p95": 0.026859846630000066,
+      "absolute_error_p99": 0.03408903184000008
+    },
+    {
+      "seed": 3456,
+      "mae": 0.010657835724832686,
+      "rmse": 0.01307078893778839,
+      "r2": 0.8922657269760885,
+      "bias": 0.009407140013760912,
+      "signed_error_p05": -0.005412280599999986,
+      "signed_error_p50": 0.009410858149999979,
+      "signed_error_p95": 0.024325901259999956,
+      "absolute_error_p50": 0.009652584799999975,
+      "absolute_error_p90": 0.020286041489999938,
+      "absolute_error_p95": 0.024325901259999956,
+      "absolute_error_p99": 0.031801294099
+    }
+  ],
+  "across_seed_metrics": {
+    "mae": {
+      "mean": 0.012476976403488521,
+      "sample_std": 0.0016032177102122678
+    },
+    "rmse": {
+      "mean": 0.014790476738360295,
+      "sample_std": 0.0015192683801646843
+    },
+    "r2": {
+      "mean": 0.8610818990079601,
+      "sample_std": 0.027648819419795287
+    },
+    "bias": {
+      "mean": 0.011761140124135145,
+      "sample_std": 0.0020763190159837413
+    }
+  },
+  "prediction_uncertainty": {
+    "mean_seed_std": 0.0028705781199976567,
+    "p95_seed_std": 0.006773786381986957,
+    "max_seed_std": 0.011062290488233336
+  },
+  "model_type": "verhulst",
+  "analysis_mode": "saved predictions and histories only; no retraining",
+  "physics_residual": {
+    "mae": 9.799090761813657e-05,
+    "rmse": 0.0001328869468303746,
+    "units": "PCL per physical cycle"
+  },
+  "verhulst_parameters": {
+    "state": "U = PCL = 1 - SoH",
+    "residual_units": "PCL per physical cycle",
+    "per_seed": [
+      {
+        "seed": 1234,
+        "state": "U = PCL = 1 - SoH",
+        "rate_r_per_cycle": 0.003912921994924545,
+        "capacity_K_pcl": 0.4501921534538269,
+        "offset_C_pcl": 0.01257405150681734,
+        "residual_units": "PCL per physical cycle"
+      },
+      {
+        "seed": 2345,
+        "state": "U = PCL = 1 - SoH",
+        "rate_r_per_cycle": 0.003579780226573348,
+        "capacity_K_pcl": 0.43125274777412415,
+        "offset_C_pcl": 0.013658235780894756,
+        "residual_units": "PCL per physical cycle"
+      },
+      {
+        "seed": 3456,
+        "state": "U = PCL = 1 - SoH",
+        "rate_r_per_cycle": 0.0036318411584943533,
+        "capacity_K_pcl": 0.43433189392089844,
+        "offset_C_pcl": 0.01349332183599472,
+        "residual_units": "PCL per physical cycle"
+      }
+    ],
+    "aggregate": {
+      "rate_r_per_cycle": {
+        "mean": 0.003708181126664082,
+        "sample_std": 0.00017921133477031276
+      },
+      "capacity_K_pcl": {
+        "mean": 0.4385922650496165,
+        "sample_std": 0.0101630873011551
+      },
+      "offset_C_pcl": {
+        "mean": 0.013241869707902273,
+        "sample_std": 0.0005841960412231999
+      }
+    }
+  },
+  "representative_batteries": {
+    "selection": "lowest, median, and highest ensemble RMSE",
+    "battery_ids": [
+      96,
+      118,
+      122
+    ]
+  }
+}

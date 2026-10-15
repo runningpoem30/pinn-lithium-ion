@@ -16,6 +16,10 @@ from src.analyze_final import (
     load_aligned_predictions,
     regression_metrics,
 )
+from src.analyze_verhulst import (
+    VERHULST_FIGURE_NAMES,
+    generate_verhulst_analysis,
+)
 
 
 FIELDNAMES = (
@@ -210,6 +214,44 @@ def test_baseline_generation_creates_expected_outputs(tmp_path: Path):
     ):
         assert (output_dir / name).is_file()
     for figure in BASELINE_FIGURE_NAMES:
+        for extension in FORMATS:
+            path = output_dir / "figures" / f"{figure}.{extension}"
+            assert path.is_file()
+            assert path.stat().st_size > 0
+
+
+def test_verhulst_generation_creates_expected_outputs(tmp_path: Path):
+    input_dir = tmp_path / "final"
+    output_dir = tmp_path / "analysis"
+    for seed, offset in ((11, -0.002), (22, 0.0), (33, 0.002)):
+        _write_seed(input_dir, seed, _prediction_rows(offset))
+        parameters = {
+            "state": "U = PCL = 1 - SoH",
+            "rate_r_per_cycle": 0.003 + seed * 1e-6,
+            "capacity_K_pcl": 0.44,
+            "offset_C_pcl": 0.013,
+            "residual_units": "PCL per physical cycle",
+        }
+        (input_dir / f"seed_{seed}" / "verhulst_parameters.json").write_text(
+            json.dumps(parameters)
+        )
+
+    summary = generate_verhulst_analysis(input_dir, output_dir)
+
+    assert summary["model_type"] == "verhulst"
+    assert summary["analysis_mode"].endswith("no retraining")
+    assert summary["records"] == 12
+    assert summary["physics_residual"]["units"] == "PCL per physical cycle"
+    assert "rate_r_per_cycle" in summary["verhulst_parameters"]["aggregate"]
+    for name in (
+        "analysis_summary.json",
+        "analysis_summary.md",
+        "per_battery_metrics.csv",
+        "per_seed_metrics.csv",
+        "aligned_ensemble_predictions.csv",
+    ):
+        assert (output_dir / name).is_file()
+    for figure in VERHULST_FIGURE_NAMES:
         for extension in FORMATS:
             path = output_dir / "figures" / f"{figure}.{extension}"
             assert path.is_file()

@@ -68,6 +68,13 @@ other models, plus the learned constrained `r`, `K`, and `C` values. The final
 test batteries are evaluated once per seed only after restoring the
 validation-selected checkpoint.
 
+`verhulst/analysis/` contains a read-only standalone analysis of the frozen
+Step 11 VerhulstPINN results. It includes aligned three-seed ensemble
+predictions, aggregate and per-battery metrics, learned-parameter summaries,
+and eight presentation figures in 300-DPI PNG, SVG, and PDF formats. Generate
+it with `python -m src.analyze_verhulst`; the command reads saved predictions,
+histories, and parameter files only and never loads or trains a model.
+
 `comparisons/soh/` contains the Step 12 read-only comparison of the completed
 DataDrivenNN, VerhulstPINN, and DeepHPMNN SoH experiments. It verifies all nine
 prediction tables against the same battery/cycle keys and targets, then saves
